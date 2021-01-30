@@ -15,5 +15,13 @@
     "url": "https://github.com/NaomiRoxann/AufgabeA/issues"
   },
   "homepage": "https://github.com/NaomiRoxann/AufgabeA#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "http": "0.0.1-security",
+    "process": "^0.11.10",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.22"
+  }
 }
