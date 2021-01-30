@@ -1,0 +1,58 @@
+{
+    "Artikel": [
+        {
+            "name": "Basketball",
+            "description": "zum Basketball spielen",
+            "pic": "Basketball_image.jpg",
+            "price": 1.00
+        },
+        {
+            "name": "Volleyball",
+            "description": "zum Volleyball spielen",
+            "pic": "2.jpg",
+            "price": 1.00
+        },
+        {
+            "name": "Fußball",
+            "description": "zum Kicken",
+            "pic": "3.jpg",
+            "price": 1.00
+        },
+        {
+            "name": "Tischtennis-Schläger",
+            "description": "zum Tischtennis spielen",
+            "pic": "4.jpg",
+            "price": 1.00
+        },
+        {
+            "name": "Beamer",
+            "description": "für Präsentationen",
+            "pic": "5.jpg",
+            "price": 10.00
+        },
+        {
+            "name": "Boxen",
+            "description": "zum Musik hören",
+            "pic": "6.jpg",
+            "price": 5.00
+        },
+        {
+            "name": "Schere",
+            "description": "zum Basteln",
+            "pic": "7.jpg",
+            "price": 0.50
+        },
+        {
+            "name": "Seil",
+            "description": "für den Notfall",
+            "pic": "8.jpg",
+            "price": 1.00
+        },
+        {
+            "name": "Joker",
+            "description": "bringt dir alles für GIS in 1 Stunde bei",
+            "pic": "jackpot.jpg",
+            "price": 1000000.00
+        }
+    ]
+}

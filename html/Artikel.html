@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>ASTA Verleih</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <script src="ArtikelLaden.js" type="text/javascript" charset="utf-8"></script>
+    <script src="script.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <header>
+        <h1>ASTA Verleih</h1>
+    </header>
+
+    <form id="ArtikelForm">
+        <!-- method="GET" - action="" - ist default -->
+        <h2>Was möchtest du vorab reservieren?</h2>
+        <fieldset id="Artikel">
+            <legend>Artikel</legend>
+        </fieldset>
+    </form>
+
+    <div>
+        <h2>Deine Auswahl</h2>
+        <div id="Auswahl">
+            ...
+        </div>
+        <button type="reset" form="ArtikelForm">Zurück auf 0</button> <!-- form verbindet Button mit Auswahl -->
+        <button type="button" form="ArtikelForm">Reservierung abschließen</button>
+        <!-- type:submit ging nicht?? -- form verbindet Button mit Auswahl -->
+    </div>
+
+</body>
+
+</html>
