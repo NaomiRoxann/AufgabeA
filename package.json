@@ -1,0 +1,23 @@
+{
+  "name": "makeit",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NaomiRoxann/makeit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NaomiRoxann/makeit/issues"
+  },
+  "homepage": "https://github.com/NaomiRoxann/makeit#readme",
+  "description": "",
+  "dependencies": {
+    "git": "^0.1.5"
+  }
+}
