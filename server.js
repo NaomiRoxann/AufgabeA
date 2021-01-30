@@ -40,7 +40,7 @@ var AufgabeA;
             _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
             //storeauswahl(url.query);
         }
-        _response.write("sadsfhjjjjjjdfsdf");
+        _response.write("so was aber");
         _response.end(); //request response braucht end um abzuschicken
     }
     // function storeauswahl(_auswahl: Auswahl): void {
