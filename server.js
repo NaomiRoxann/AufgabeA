@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AufgabeA = void 0;
 const Http = require("http");
 const Url = require("url"); //url kommt mit request
-//import * as Mongo from "mongodb";
+const Mongo = require("mongodb");
 var AufgabeA;
 (function (AufgabeA) {
     //let ausgewählt: Mongo.Collection;
@@ -11,22 +11,22 @@ var AufgabeA;
     if (port == undefined) { //just in case
         port = 8000;
     }
-    //let databaseUrl: string = "mongodb://localhost:27017";
     startServer(port);
-    //connectToDatabase(databaseUrl);
+    let dbUrl = "mongodb://localhost:27017";
+    connectToDatabase(dbUrl);
     function startServer(_port) {
         let server = Http.createServer(); //server in variable anlegen
         console.log("Server starting on port:" + _port); //x
         server.listen(_port); //passiert im port was?
         server.addListener("request", handleRequest); //kam ein request vom server?
     }
-    // async function connectToDatabase(_url: string): Promise<void> {
-    //     let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-    //     let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-    //     await mongoClient.connect();
-    //     ausgewählt = mongoClient.db("CocktailBar").collection("ausgewählt");
-    //     console.log("Database connection ", ausgewählt != undefined);
-    // }
+    async function connectToDatabase(_url) {
+        let options = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
+        let mongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
+        await mongoClient.connect(); //Promise zu verbinden
+        let ausgewählt = mongoClient.db("Artikel").collection("Ausgewählt");
+        console.log("Database connection ", ausgewählt != undefined); //x
+    }
     function handleRequest(_request, _response) {
         console.log("What's up?"); //x
         _response.setHeader("content-type", "text/html; charset=utf-8"); //metadata (siehe html header)
@@ -38,14 +38,14 @@ var AufgabeA;
             // }
             let json = JSON.stringify(url.query); //übersetzt Array in Json
             _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
-            //storeauswahl(url.query);
+            storeauswahl(url.query);
         }
         _response.end(); //request response braucht end um abzuschicken
     }
-    // function storeauswahl(_auswahl: Auswahl): void {
-    //     // ausgewählt.insert(_auswahl);
-    //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-    //     ausgewählt.insertOne(_auswahl);
-    // }
+    function storeauswahl(_auswahl) {
+        ausgewählt.insert(_auswahl);
+        //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
+        //     ausgewählt.insertOne(_auswahl);
+    }
 })(AufgabeA = exports.AufgabeA || (exports.AufgabeA = {}));
 //# sourceMappingURL=server.js.map

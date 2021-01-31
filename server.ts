@@ -1,11 +1,11 @@
 import * as Http from "http";
 import * as Url from "url"; //url kommt mit request
-//import * as Mongo from "mongodb";
+import * as Mongo from "mongodb";
 
 export namespace AufgabeA {
 
     interface Auswahl {
-        [type: string]: string | string[];
+        [key: string]: string | string[];
     }
 
     //let ausgewählt: Mongo.Collection;
@@ -14,11 +14,10 @@ export namespace AufgabeA {
     if (port == undefined) { //just in case
         port = 8000;
     }
-
-    //let databaseUrl: string = "mongodb://localhost:27017";
-
     startServer(port);
-    //connectToDatabase(databaseUrl);
+
+    let dbUrl: string = "mongodb://localhost:27017";
+    connectToDatabase(dbUrl);
 
     function startServer(_port: number | string): void {
         let server: Http.Server = Http.createServer(); //server in variable anlegen
@@ -28,13 +27,13 @@ export namespace AufgabeA {
         server.addListener("request", handleRequest); //kam ein request vom server?
     }
 
-    // async function connectToDatabase(_url: string): Promise<void> {
-    //     let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
-    //     let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-    //     await mongoClient.connect();
-    //     ausgewählt = mongoClient.db("CocktailBar").collection("ausgewählt");
-    //     console.log("Database connection ", ausgewählt != undefined);
-    // }
+    async function connectToDatabase(_url: string): Promise<void> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
+        await mongoClient.connect(); //Promise zu verbinden
+        let ausgewählt = mongoClient.db("Artikel").collection("Ausgewählt");
+        console.log("Database connection ", ausgewählt != undefined); //x
+    }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //request gibt 2 Parameter, incoming&response
         console.log("What's up?"); //x
@@ -51,16 +50,16 @@ export namespace AufgabeA {
             let json: string = JSON.stringify(url.query); //übersetzt Array in Json
             _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
 
-            //storeauswahl(url.query);
+            storeauswahl(url.query);
         }
 
         _response.end(); //request response braucht end um abzuschicken
     }
 
 
-    // function storeauswahl(_auswahl: Auswahl): void {
-    //     // ausgewählt.insert(_auswahl);
-    //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-    //     ausgewählt.insertOne(_auswahl);
-    // }
+    function storeauswahl(_auswahl: Auswahl): void {
+        ausgewählt.insert(_auswahl);
+        //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
+        //     ausgewählt.insertOne(_auswahl);
+    }
 }
