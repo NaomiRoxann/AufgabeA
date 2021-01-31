@@ -66,6 +66,6 @@ export namespace AufgabeA {
     function storeauswahl(_auswahl: Auswahl): void {
         //     // ausgewählt.insert(_auswahl);
         //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-        ausgewählt.insertOne(_auswahl);
+        ausgewählt.insert(_auswahl);
     }
 }
