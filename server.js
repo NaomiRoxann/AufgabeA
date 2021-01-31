@@ -6,7 +6,7 @@ const Url = require("url"); //url kommt mit request
 const Mongo = require("mongodb");
 var AufgabeA;
 (function (AufgabeA) {
-    let ausgewählt;
+    let selected;
     let port = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
         port = 8000;
@@ -30,8 +30,8 @@ var AufgabeA;
         let options = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
         let mongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await mongoClient.connect(); //Promise zu verbinden
-        ausgewählt = mongoClient.db("Artikel").collection("Ausgewählt");
-        console.log("Database connection ", ausgewählt != undefined); //x
+        selected = mongoClient.db("Artikel").collection("Ausgewählt");
+        console.log("Database connection ", selected != undefined); //x
     }
     function handleRequest(_request, _response) {
         console.log("What's up?"); //x
@@ -50,7 +50,7 @@ var AufgabeA;
         _response.end(); //request response braucht end um abzuschicken
     }
     function storeauswahl(_auswahl) {
-        ausgewählt.insertOne(_auswahl);
+        selected.insertOne(_auswahl);
     }
 })(AufgabeA = exports.AufgabeA || (exports.AufgabeA = {}));
 //# sourceMappingURL=server.js.map

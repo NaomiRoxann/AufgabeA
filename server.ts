@@ -8,7 +8,7 @@ export namespace AufgabeA {
         [key: string]: string | string[];
     }
 
-    let ausgewählt: Mongo.Collection;
+    let selected: Mongo.Collection;
 
     let port: number | string | undefined = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
@@ -37,8 +37,8 @@ export namespace AufgabeA {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await mongoClient.connect(); //Promise zu verbinden
-        ausgewählt = mongoClient.db("Artikel").collection("Ausgewählt");
-        console.log("Database connection ", ausgewählt != undefined); //x
+        selected = mongoClient.db("Artikel").collection("Ausgewählt");
+        console.log("Database connection ", selected != undefined); //x
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //request gibt 2 Parameter, incoming&response
@@ -64,6 +64,6 @@ export namespace AufgabeA {
 
 
     function storeauswahl(_auswahl: Auswahl): void {
-        ausgewählt.insertOne(_auswahl);
+        selected.insertOne(_auswahl);
     }
 }
