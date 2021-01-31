@@ -30,7 +30,7 @@ var AufgabeA;
         let options = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
         let mongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await mongoClient.connect(); //Promise zu verbinden
-        selected = mongoClient.db("Artikel").collection("Ausgewählt");
+        selected = mongoClient.db("Artikel").collection("selected");
         console.log("Database connection ", selected != undefined); //x
     }
     function handleRequest(_request, _response) {
