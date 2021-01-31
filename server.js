@@ -12,7 +12,7 @@ var AufgabeA;
         port = 8000;
     }
     startServer(port);
-    let dbUrl = "mongodb+srv://Naomi:<bitch>@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
+    let dbUrl = "mongodb+srv://Naomi:<bitch>@cluster0.stmjt.mongodb.net/<Artikel>?retryWrites=true&w=majority";
     connectToDatabase(dbUrl);
     function startServer(_port) {
         let server = Http.createServer(); //server in variable anlegen

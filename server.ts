@@ -16,7 +16,7 @@ export namespace AufgabeA {
     }
     startServer(port);
 
-    let dbUrl: string = "mongodb+srv://Naomi:<bitch>@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
+    let dbUrl: string = "mongodb+srv://Naomi:<bitch>@cluster0.stmjt.mongodb.net/<Artikel>?retryWrites=true&w=majority";
     connectToDatabase(dbUrl);
 
     function startServer(_port: number | string): void {
