@@ -58,7 +58,7 @@ export namespace AufgabeA {
 
         //     storeauswahl(url.query);
         // }
-        _response.write("the fuck");
+        _response.write("Artikel.html");
         _response.end(); //request response braucht end um abzuschicken
     }
 
