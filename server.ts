@@ -47,17 +47,17 @@ export namespace AufgabeA {
         _response.setHeader("content-type", "text/html; charset=utf-8"); //metadata (siehe html header)
         _response.setHeader("Access-Control-Allow-Origin", "*"); //metadata (siehe html header)
 
-        // if (_request.url) {
-        //     let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //url übersetzen in Array -- WARUM DURCHGESTRICHEN
-        //     //for (let key in url.query) {
-        //     //  _response.write(url.query[key] + "<br/>"); //wird angezeigt
-        //     // }
+        if (_request.url) {
+            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //url übersetzen in Array -- WARUM DURCHGESTRICHEN
+            //for (let key in url.query) {
+            //  _response.write(url.query[key] + "<br/>"); //wird angezeigt
+            // }
 
-        //     let json: string = JSON.stringify(url.query); //übersetzt Array in Json
-        //     _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
+            let json: string = JSON.stringify(url.query); //übersetzt Array in Json
+            _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
 
-        //     storeauswahl(url.query);
-        // }
+            storeauswahl(url.query);
+        }
         _response.write("the fuck");
         _response.end(); //request response braucht end um abzuschicken
     }

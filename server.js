@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AufgabeA = void 0;
 const Http = require("http");
+const Url = require("url"); //url kommt mit request
 const Mongo = require("mongodb");
 var AufgabeA;
 (function (AufgabeA) {
@@ -36,15 +37,15 @@ var AufgabeA;
         console.log("What's up?"); //x
         _response.setHeader("content-type", "text/html; charset=utf-8"); //metadata (siehe html header)
         _response.setHeader("Access-Control-Allow-Origin", "*"); //metadata (siehe html header)
-        // if (_request.url) {
-        //     let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //url übersetzen in Array -- WARUM DURCHGESTRICHEN
-        //     //for (let key in url.query) {
-        //     //  _response.write(url.query[key] + "<br/>"); //wird angezeigt
-        //     // }
-        //     let json: string = JSON.stringify(url.query); //übersetzt Array in Json
-        //     _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
-        //     storeauswahl(url.query);
-        // }
+        if (_request.url) {
+            let url = Url.parse(_request.url, true); //url übersetzen in Array -- WARUM DURCHGESTRICHEN
+            //for (let key in url.query) {
+            //  _response.write(url.query[key] + "<br/>"); //wird angezeigt
+            // }
+            let json = JSON.stringify(url.query); //übersetzt Array in Json
+            _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
+            storeauswahl(url.query);
+        }
         _response.write("the fuck");
         _response.end(); //request response braucht end um abzuschicken
     }
