@@ -12,7 +12,7 @@ var AufgabeA;
         port = 8000;
     }
     startServer(port);
-    let dbUrl = "mongodb://localhost:27017";
+    let dbUrl = "mongodb+srv://Naomi:<bitch>@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
     connectToDatabase(dbUrl);
     function startServer(_port) {
         let server = Http.createServer(); //server in variable anlegen
@@ -45,7 +45,7 @@ var AufgabeA;
     function storeauswahl(_auswahl) {
         //     // ausgewählt.insert(_auswahl);
         //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-        ausgewählt.insert(_auswahl);
+        ausgewählt.insertOne(_auswahl);
     }
 })(AufgabeA = exports.AufgabeA || (exports.AufgabeA = {}));
 //# sourceMappingURL=server.js.map
