@@ -59,7 +59,7 @@ export namespace AufgabeA {
 
             storeauswahl(url.query);
         }
-        _response.write("whatever");
+        _response.write(selected);
         _response.end(); //request response braucht end um abzuschicken
     }
 

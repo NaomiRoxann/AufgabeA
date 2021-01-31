@@ -47,7 +47,7 @@ var AufgabeA;
             _response.write(json); //write den request aus der url
             storeauswahl(url.query);
         }
-        _response.write("whatever");
+        _response.write(selected);
         _response.end(); //request response braucht end um abzuschicken
     }
     console.log(selected);
