@@ -5,7 +5,7 @@ import * as Mongo from "mongodb";
 export namespace AufgabeA {
 
     interface Auswahl {
-        [type: string]: string | string[];
+        [key: string]: string | string[];
     }
 
     let ausgewählt: Mongo.Collection;
