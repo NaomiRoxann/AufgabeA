@@ -65,6 +65,7 @@ export namespace AufgabeA {
 
     console.log(selected);
     function storeauswahl(_auswahl: Auswahl): void {
+        console.log("gibts das");
         selected.insertOne(_auswahl);
     }
 }

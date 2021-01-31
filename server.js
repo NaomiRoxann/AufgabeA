@@ -52,6 +52,7 @@ var AufgabeA;
     }
     console.log(selected);
     function storeauswahl(_auswahl) {
+        console.log("gibts das");
         selected.insertOne(_auswahl);
     }
 })(AufgabeA = exports.AufgabeA || (exports.AufgabeA = {}));
