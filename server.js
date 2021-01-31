@@ -46,6 +46,7 @@ var AufgabeA;
             _response.write(json); //KANN ICH DIE OBERE ZEILE WEGLASSEN UND HIER EINFACH DATA.JSON ALS RESPONSE WRITEN?
             storeauswahl(url.query);
         }
+        _response.write("the fuck");
         _response.end(); //request response braucht end um abzuschicken
     }
     function storeauswahl(_auswahl) {
