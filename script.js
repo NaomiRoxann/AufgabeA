@@ -4,7 +4,7 @@ var AufgabeA;
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
     let form; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
-    let url = "https://aufgabea.herokuapp.com"; //serveradresse
+    let url = "https://localhost:8001"; //serveradresse
     async function handleLoad(_event) {
         console.log("Init"); //x
         let response = await fetch("Data.json"); //warten bis Daten gefetched sind
