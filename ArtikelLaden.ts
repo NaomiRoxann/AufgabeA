@@ -7,20 +7,23 @@ namespace AufgabeA {
         pic: string;
         price: number;
     }
+    export interface Data {
+        [key: string]: Artikel[];
+    }
 
 
 
-    export function ArtikelLaden(_artikel: Artikel): void {
+    export function ArtikelLaden(_data: Data): void {
 
-        for (let allartikel in _artikel) { //geht über Artikel
-            // console.log(allartikel);
+        for (let allartikel in _data) { //geht über Artikel
+            console.log(allartikel);
 
-            //let artikel: Artikel[] = _artikel[allartikel];
+            let artikel: Artikel[] = _data[allartikel];
 
-            //let group: HTMLElement = createMultiple(artikel); //group in func (return) wird group in Schleife zugewiesen
+            let group: HTMLElement = createMultiple(artikel); //group in func (return) wird group in Schleife zugewiesen
 
             let fieldset: HTMLFieldSetElement = document.querySelector("fieldset#" + allartikel); //verbindet mit HTML
-            //fieldset.appendChild(group);
+            fieldset.appendChild(group);
 
         }
 

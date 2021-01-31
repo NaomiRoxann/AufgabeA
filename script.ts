@@ -9,7 +9,7 @@ namespace AufgabeA {
 
         let response: Response = await fetch("data.json"); //warten bis Daten gefetched sind
         let allArtikel: string = await response.text(); //warten bis Daten greifbar sind
-        let data: Artikel = JSON.parse(allArtikel); //Daten übersetzen
+        let data: Data = JSON.parse(allArtikel); //Daten übersetzen
 
         ArtikelLaden(data);
 
