@@ -5,10 +5,10 @@ import * as Mongo from "mongodb";
 export namespace AufgabeA {
 
     interface Auswahl {
-        [key: string]: string | string[];
+        [type: string]: string | string[];
     }
 
-    //let ausgewählt: Mongo.Collection;
+    let ausgewählt: Mongo.Collection;
 
     let port: number | string | undefined = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
@@ -58,8 +58,8 @@ export namespace AufgabeA {
 
 
     function storeauswahl(_auswahl: Auswahl): void {
-        ausgewählt.insert(_auswahl);
+        //     // ausgewählt.insert(_auswahl);
         //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-        //     ausgewählt.insertOne(_auswahl);
+        ausgewählt.insertOne(_auswahl);
     }
 }
