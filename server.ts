@@ -37,7 +37,7 @@ export namespace AufgabeA {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await mongoClient.connect(); //Promise zu verbinden
-        let ausgewählt = mongoClient.db("Artikel").collection("Ausgewählt");
+        ausgewählt = mongoClient.db("Artikel").collection("Ausgewählt");
         console.log("Database connection ", ausgewählt != undefined); //x
     }
 
