@@ -49,6 +49,7 @@ var AufgabeA;
         _response.write("whatever");
         _response.end(); //request response braucht end um abzuschicken
     }
+    console.log(selected);
     function storeauswahl(_auswahl) {
         selected.insertOne(_auswahl);
     }

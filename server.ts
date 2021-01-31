@@ -62,7 +62,7 @@ export namespace AufgabeA {
         _response.end(); //request response braucht end um abzuschicken
     }
 
-
+    console.log(selected);
     function storeauswahl(_auswahl: Auswahl): void {
         selected.insertOne(_auswahl);
     }
