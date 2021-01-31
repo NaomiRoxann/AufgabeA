@@ -50,9 +50,7 @@ var AufgabeA;
         _response.end(); //request response braucht end um abzuschicken
     }
     function storeauswahl(_auswahl) {
-        //     // ausgewählt.insert(_auswahl);
-        //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-        ausgewählt.insert(_auswahl);
+        ausgewählt.insertOne(_auswahl);
     }
 })(AufgabeA = exports.AufgabeA || (exports.AufgabeA = {}));
 //# sourceMappingURL=server.js.map
