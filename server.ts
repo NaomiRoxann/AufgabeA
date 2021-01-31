@@ -12,7 +12,7 @@ export namespace AufgabeA {
 
     let port: number | string | undefined = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
-        port = 8000;
+        port = 8001;
     }
     startServer(port);
 

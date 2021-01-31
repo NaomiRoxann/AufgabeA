@@ -9,7 +9,7 @@ var AufgabeA;
     let ausgewählt;
     let port = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
-        port = 8000;
+        port = 8001;
     }
     startServer(port);
     let dbUrl = "mongodb+srv://Naomi:<bitch>@cluster0.stmjt.mongodb.net/<Artikel>?retryWrites=true&w=majority";
