@@ -32,6 +32,7 @@ var AufgabeA;
         await mongoClient.connect(); //Promise zu verbinden
         selected = mongoClient.db("Artikel").collection("selected");
         console.log("Database connection ", selected != undefined); //x
+        console.log(selected);
     }
     function handleRequest(_request, _response) {
         console.log("What's up?"); //x

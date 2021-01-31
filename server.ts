@@ -39,6 +39,7 @@ export namespace AufgabeA {
         await mongoClient.connect(); //Promise zu verbinden
         selected = mongoClient.db("Artikel").collection("selected");
         console.log("Database connection ", selected != undefined); //x
+        console.log(selected);
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //request gibt 2 Parameter, incoming&response
