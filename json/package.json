@@ -7,7 +7,7 @@
     "node": "14.15.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node /Users/naomikruger/Documents/GIS/aufgabe_a/server.js remote"
   },
   "repository": {
     "type": "git",
