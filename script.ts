@@ -2,7 +2,7 @@ namespace AufgabeA {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
     let form: HTMLFormElement; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
-    let url: string = "https://localhost:8001"; //serveradresse
+    let url: string = "localhost:8001"; //serveradresse
 
     async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
         console.log("Init"); //x
