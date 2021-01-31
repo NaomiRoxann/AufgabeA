@@ -6,7 +6,7 @@ const Url = require("url"); //url kommt mit request
 const Mongo = require("mongodb");
 var AufgabeA;
 (function (AufgabeA) {
-    //let ausgewählt: Mongo.Collection;
+    let ausgewählt;
     let port = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
         port = 8000;
@@ -45,7 +45,7 @@ var AufgabeA;
     function storeauswahl(_auswahl) {
         //     // ausgewählt.insert(_auswahl);
         //     // insert is depricated, use insertOne instead (Jirka Dell'Oro-Friedl, 2020)
-        //     ausgewählt.insertOne(_auswahl);
+        ausgewählt.insertOne(_auswahl);
     }
 })(AufgabeA = exports.AufgabeA || (exports.AufgabeA = {}));
 //# sourceMappingURL=server.js.map
