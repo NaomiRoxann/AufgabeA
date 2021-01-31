@@ -18,6 +18,7 @@ var AufgabeA;
         button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
         showAuswahl();
     }
+    AufgabeA.handleLoad = handleLoad;
     async function submitAuswahl(_event) {
         console.log("submit Auswahl"); //x
         let formData = new FormData(form); //form info für submitAuswahl

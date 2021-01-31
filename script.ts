@@ -4,7 +4,7 @@ namespace AufgabeA {
     // let url: string = "index.html";
     let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
 
-    async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
+    export async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
         console.log("Init"); //x
 
         let response: Response = await fetch("data.json"); //warten bis Daten gefetched sind
