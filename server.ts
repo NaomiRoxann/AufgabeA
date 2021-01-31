@@ -16,7 +16,13 @@ export namespace AufgabeA {
     }
     startServer(port);
 
-    let dbUrl: string = "mongodb+srv://Naomi:bitch2021@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
+    let dbUrl: string = "";
+    //local oder remote
+    let args: string[] = process.argv.slice(2);
+    if (args[0] == "local")
+        dbUrl = "mongodb://localhost:27017";
+    else // default: remote
+        dbUrl = "mongodb+srv://Naomi:bitch2021@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
     connectToDatabase(dbUrl);
 
     function startServer(_port: number | string): void {

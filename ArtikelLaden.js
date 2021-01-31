@@ -5,10 +5,10 @@ var AufgabeA;
     function ArtikelLaden(_artikel) {
         for (let allartikel in _artikel) { //geht über Artikel
             // console.log(allartikel);
-            let artikel = _artikel[allartikel];
-            let group = createMultiple(artikel); //group in func (return) wird group in Schleife zugewiesen
+            //let artikel: Artikel[] = _artikel[allartikel];
+            //let group: HTMLElement = createMultiple(artikel); //group in func (return) wird group in Schleife zugewiesen
             let fieldset = document.querySelector("fieldset#" + allartikel); //verbindet mit HTML
-            fieldset.appendChild(group);
+            //fieldset.appendChild(group);
         }
         function createMultiple(_artikel) {
             let group = document.createElement("div"); //neue group in func

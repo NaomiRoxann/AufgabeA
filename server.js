@@ -12,7 +12,13 @@ var AufgabeA;
         port = 8000;
     }
     startServer(port);
-    let dbUrl = "mongodb+srv://Naomi:bitch2021@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
+    let dbUrl = "";
+    //local oder remote
+    let args = process.argv.slice(2);
+    if (args[0] == "local")
+        dbUrl = "mongodb://localhost:27017";
+    else // default: remote
+        dbUrl = "mongodb+srv://Naomi:bitch2021@cluster0.stmjt.mongodb.net/<gisAufgabe>?retryWrites=true&w=majority";
     connectToDatabase(dbUrl);
     function startServer(_port) {
         let server = Http.createServer(); //server in variable anlegen

@@ -15,12 +15,12 @@ namespace AufgabeA {
         for (let allartikel in _artikel) { //geht über Artikel
             // console.log(allartikel);
 
-            let artikel: Artikel[] = _artikel[allartikel];
+            //let artikel: Artikel[] = _artikel[allartikel];
 
-            let group: HTMLElement = createMultiple(artikel); //group in func (return) wird group in Schleife zugewiesen
+            //let group: HTMLElement = createMultiple(artikel); //group in func (return) wird group in Schleife zugewiesen
 
             let fieldset: HTMLFieldSetElement = document.querySelector("fieldset#" + allartikel); //verbindet mit HTML
-            fieldset.appendChild(group);
+            //fieldset.appendChild(group);
 
         }
 
