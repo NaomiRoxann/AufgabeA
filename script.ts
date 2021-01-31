@@ -7,7 +7,7 @@ namespace AufgabeA {
     async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
         console.log("Init"); //x
 
-        let response: Response = await fetch("Data.json"); //warten bis Daten gefetched sind
+        let response: Response = await fetch("data.json"); //warten bis Daten gefetched sind
         let allArtikel: string = await response.text(); //warten bis Daten greifbar sind
         let data: Artikel = JSON.parse(allArtikel); //Daten übersetzen
 

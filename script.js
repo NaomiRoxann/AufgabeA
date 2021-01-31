@@ -7,7 +7,7 @@ var AufgabeA;
     let url = "https://aufgabea.herokuapp.com"; //serveradresse
     async function handleLoad(_event) {
         console.log("Init"); //x
-        let response = await fetch("Data.json"); //warten bis Daten gefetched sind
+        let response = await fetch("data.json"); //warten bis Daten gefetched sind
         let allArtikel = await response.text(); //warten bis Daten greifbar sind
         let data = JSON.parse(allArtikel); //Daten übersetzen
         AufgabeA.ArtikelLaden(data);
