@@ -8,6 +8,7 @@ export namespace AufgabeA {
         [key: string]: string | string[];
     }
 
+    let allartikel: Mongo.Collection;
     let selected: Mongo.Collection;
 
     let port: number | string | undefined = process.env.PORT; //port anlegen
@@ -37,9 +38,10 @@ export namespace AufgabeA {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await mongoClient.connect(); //Promise zu verbinden
+        allartikel = mongoClient.db("gisAufgabe").collection("Artikel");
         selected = mongoClient.db("Artikel").collection("selected");
-        console.log("Database connection ", selected != undefined); //x
-        console.log(selected);
+        console.log("Database connection ", allartikel != undefined); //x
+
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //request gibt 2 Parameter, incoming&response
@@ -57,14 +59,14 @@ export namespace AufgabeA {
             let json: string = JSON.stringify(url.query); //übersetzt Array in Json
             _response.write(json); //write den request aus der url
 
-            storeauswahl(url.query);
+            auswahlMerken(url.query);
         }
-        _response.write(selected);
+        _response.write(allartikel);
         _response.end(); //request response braucht end um abzuschicken
     }
 
     console.log(selected);
-    function storeauswahl(_auswahl: Auswahl): void {
+    function auswahlMerken(_auswahl: Auswahl): void {
         console.log("gibts das");
         selected.insertOne(_auswahl);
     }

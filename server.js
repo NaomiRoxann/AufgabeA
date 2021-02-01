@@ -6,6 +6,7 @@ const Url = require("url"); //url kommt mit request
 const Mongo = require("mongodb");
 var AufgabeA;
 (function (AufgabeA) {
+    let allartikel;
     let selected;
     let port = process.env.PORT; //port anlegen
     if (port == undefined) { //just in case
@@ -30,9 +31,9 @@ var AufgabeA;
         let options = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
         let mongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await mongoClient.connect(); //Promise zu verbinden
+        allartikel = mongoClient.db("gisAufgabe").collection("Artikel");
         selected = mongoClient.db("Artikel").collection("selected");
-        console.log("Database connection ", selected != undefined); //x
-        console.log(selected);
+        console.log("Database connection ", allartikel != undefined); //x
     }
     function handleRequest(_request, _response) {
         console.log("What's up?"); //x
@@ -45,13 +46,13 @@ var AufgabeA;
             //     }
             let json = JSON.stringify(url.query); //übersetzt Array in Json
             _response.write(json); //write den request aus der url
-            storeauswahl(url.query);
+            auswahlMerken(url.query);
         }
-        _response.write(selected);
+        _response.write(allartikel);
         _response.end(); //request response braucht end um abzuschicken
     }
     console.log(selected);
-    function storeauswahl(_auswahl) {
+    function auswahlMerken(_auswahl) {
         console.log("gibts das");
         selected.insertOne(_auswahl);
     }
