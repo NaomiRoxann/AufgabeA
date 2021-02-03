@@ -2,12 +2,12 @@
   "name": "a",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "script.js",
   "engines": {
     "node": "14.15.0"
   },
   "scripts": {
-    "start": "node /Users/naomikruger/Documents/GIS/aufgabe_a/server.js remote"
+    "start": "node GIS/aufgabe_a/server.js remote"
   },
   "repository": {
     "type": "git",
