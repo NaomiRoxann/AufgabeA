@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="Checkout.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -14,19 +15,19 @@
 
     <main id="main">
         <div id="liveupdate">
-            <h2>Deine Bestellung:</h2>
+            <h2>Deine Auswahl:</h2>
             <div id="order">
-                <p>Keine Bestellung vorhanden</p>
+                <p id="Reservierung">Wähle zuerst auf der <a href="../html/Artikel.html">Startseite</a> aus, was du
+                    reservieren möchtest.
+                </p>
             </div>
         </div>
         <form id="formCart" method="GET" action="https://aufgabea.herokuapp.com/">
             <!-- <form method="GET" action="http://localhost:8100" > -->
             <div>
-                <h2 id="bestellheader">Reservierung abschließen</h2>
                 <label>Name:</label><br>
                 <input class="formular" type="text" name="Name">
-
-                <button id="buttonBestellen" type="button">Submit!</button>
+                <button id="submitbutton" type="button">Reservierung abschließen!</button>
             </div>
         </form>
     </main>

@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>ASTA Verleih</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
-    <script src="ArtikelLaden.js" type="text/javascript" charset="utf-8"></script>
     <script src="script.js" type="text/javascript" charset="utf-8"></script>
+    <script src="ArtikelLaden.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -14,12 +14,12 @@
         <h1>ASTA Verleih</h1>
     </header>
 
-    <form id="ArtikelForm">
+    <form id="FormArtikel">
         <!-- method="GET" - action="" - ist default -->
         <h2>Was möchtest du vorab reservieren?</h2>
-        <fieldset id="Artikel">
+        <div id="Artikel">
             <legend>Artikel</legend>
-        </fieldset>
+        </div>
     </form>
 
     <div>
@@ -27,8 +27,8 @@
         <div id="Auswahl">
             ...
         </div>
-        <button type="reset" form="ArtikelForm">Zurück auf 0</button> <!-- form verbindet Button mit Auswahl -->
-        <button type="button" form="ArtikelForm">Reservierung abschließen</button>
+        <button type="reset" form="FormArtikel">Zurück auf 0</button> <!-- form verbindet Button mit Auswahl -->
+        <button type="button" form="FormArtikel">Reservierung abschließen</button>
         <!-- type:submit ging nicht?? -- form verbindet Button mit Auswahl -->
     </div>
 
