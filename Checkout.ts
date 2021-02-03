@@ -43,7 +43,7 @@ namespace AufgabeA {
         url += "/makeReserviert" + "?" + auswahl + query.toString(); // Formular in URL + localstorage
 
 
-        let formular: HTMLFormElement = <HTMLFormElement>document.getElementById("formCart"); // Formular nach dem Absenden zurücksetzen
+        let formular: HTMLFormElement = <HTMLFormElement>document.getElementById("formCheckout"); // Formular nach dem Absenden zurücksetzen
         if (formular)
             formular.reset();
 

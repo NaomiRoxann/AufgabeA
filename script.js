@@ -3,8 +3,8 @@ var AufgabeA;
 (function (AufgabeA) {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
     // let url: string = "index.html";
-    AufgabeA.url = "https://aufgabea.herokuapp.com"; //serveradresse
-    // let url: string = "http://localhost:8000";
+    //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
+    AufgabeA.url = "http://localhost:8000";
     //async function erhalteJSON(_url: RequestInfo): Promise<void> {
     async function handleLoad(_event) {
         console.log("Init"); //x

@@ -3,8 +3,8 @@ namespace AufgabeA {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
     export let form: HTMLFormElement; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
-    export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
-    // let url: string = "http://localhost:8000";
+    //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
+    export let url: string = "http://localhost:8000";
 
     //async function erhalteJSON(_url: RequestInfo): Promise<void> {
     export async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:

@@ -32,7 +32,7 @@ var AufgabeA;
         AufgabeA.url += "/addName" + "?" + auswahl + query.toString(); // Formular in URL + localstorage
         //irgendwas das Status ändert
         AufgabeA.url += "/makeReserviert" + "?" + auswahl + query.toString(); // Formular in URL + localstorage
-        let formular = document.getElementById("formCart"); // Formular nach dem Absenden zurücksetzen
+        let formular = document.getElementById("formCheckout"); // Formular nach dem Absenden zurücksetzen
         if (formular)
             formular.reset();
         //await fetch(url);
