@@ -1,0 +1,23 @@
+{
+  "name": "aufgabea",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node GIS/aufgabe_a/server.js remote"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NaomiRoxann/makeit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NaomiRoxann/makeit/issues"
+  },
+  "homepage": "https://github.com/NaomiRoxann/makeit#readme",
+  "dependencies": {
+    "git": "^0.1.5"
+  },
+  "devDependencies": {},
+  "description": ""
+}
