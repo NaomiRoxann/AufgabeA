@@ -9,12 +9,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NaomiRoxann/makeit.git"
+    "url": "git+https://github.com/NaomiRoxann/AufgabeA.git"
   },
   "bugs": {
-    "url": "https://github.com/NaomiRoxann/makeit/issues"
+    "url": "https://github.com/NaomiRoxann/AufgabeA/issues"
   },
-  "homepage": "https://github.com/NaomiRoxann/makeit#readme",
+  "homepage": "https://github.com/NaomiRoxann/AufgabeA#readme",
   "dependencies": {
     "git": "^0.1.5"
   },
