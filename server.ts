@@ -1,7 +1,7 @@
 import * as Http from "http"; //Laden des Modules (Erweiterung) HTTP, um einen Server zu bauen. * = sämtliche Funktionalität laden
 import * as Url from "url"; //url kommt mit request //Aufgabe des Url Moduls ist die Aufsplittung der URl in lesbare Teile. Muss importiert werden zur Verwendung
 import * as Mongo from "mongodb";
-//import * as fs from "fs";
+import * as fs from "fs";
 
 import { ParsedUrlQuery } from "querystring"; //quick fix für function getID
 
@@ -11,30 +11,6 @@ export namespace AufgabeA {
     // interface Auswahl {
     //     [key: string]: string | string[];
     // }
-
-    // https://medium.com/@kellydsample/challenge-3-run-a-vanilla-js-project-in-your-browser-with-node-791e124aa2c6
-    // let html;
-    // let css;
-    // let js;
-    // fs.readFile('./Artikel.html', function (err, data) {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     html = data;
-    // });
-    // fs.readFile('./style.css', function (err, data) {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     css = data;
-    // });
-    // fs.readFile('./script.js', function (err, data) {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     js = data;
-    // });
-
 
     let port: number | string | undefined = process.env.PORT; //port anlegen //Port ist wie ein Hafen, dann können Informationen rein und raus //process.env gibt mir Informationen über meinen node Prozess,über meine Maschine/meinen Rechner | in dem Fall über den Port
     if (port == undefined) { //just in case //Hat die Maschine mir einen port zugeteilt? - suche nach port, variable
@@ -67,8 +43,8 @@ export namespace AufgabeA {
     let allartikel: Mongo.Collection;
 
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> { //request gibt 2 Parameter, incoming&response
-        //Bei der Request(Anfrage) kommt ein Parameter vom Typ "IncomingMessage" herein und es wird eine Antwort zur Verüfung gestellt "ServerResponse", die aber noch leer ist
-        console.log("What's up?"); //x
+
+        console.log("What's up?"); //x //wird plötzlich 3 mal ausgegeben???
 
         _response.setHeader("content-type", "text/html; charset=utf-8"); //metadata (siehe html header) //Füllen der Response mit leerem Text
         _response.setHeader("Access-Control-Allow-Origin", "*"); //metadata (siehe html header) //Erlaubt dass man von überall anfragen darf, sonst motzt Browser
@@ -76,18 +52,40 @@ export namespace AufgabeA {
         if (_request.url) { //URL Modul hilfe die request weiterzuverarbeiten //erst wird überprüft ob eine verarbetinare URL da ist
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //"parse" "urlwithparsedquery" macht die url leserlich, durch wandel in anderes format //Parameter "true" macht ein assoziatives array draus, welches sich leichter lesen lässt
 
+            // for (let key in url.query) { //Query brauchen wir Weil da die infos (wie preis) drinnen sind; also für jeden key im query...
+            //     console.log("Information: " + url.query[key]); // gebe "Information" und das schlüsselwertepaar aus, was man also unter diesem key im query findet
+            // }
+
+
             //if (url.pathname == "/getArtikel") { // Artikel werden abgerufen
-            let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
-            let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
-            let allartikelString: string = JSON.stringify(allartikelArray);
-            _response.write(allartikelString);
+            // let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
+            // let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
+            // let allartikelString: string = JSON.stringify(allartikelArray);
+            // _response.write(allartikelString);
             //}
 
-            // var readStream = fileserver.createReadStream("./Artikel.html");
+
             // // We replaced all the event handlers with a simple call to readStream.pipe()
             // readStream.pipe(_response);
             // _response.end(readStream);
+            if (url.pathname.endsWith(".js") || url.pathname.endsWith(".css")) {
+                let html = await fs.readFileSync("./" + url.pathname, { encoding: 'utf8', flag: 'r' });
+                _response.writeHead(200, { 'Content-Type': url.pathname.endsWith(".js") ? 'text/javascript' : 'text/css' });
+                _response.write(html);
+            }
 
+            if (url.pathname == "/allArtikel") { // Name für Reservierung in die DB
+                let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
+                let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
+                let allartikelString: string = JSON.stringify(allartikelArray);
+                _response.write(allartikelString);
+            }
+
+
+            if (url.pathname == "/") {
+                let readStream = fs.readFileSync("./Artikel.html");
+                _response.write(readStream);
+            }
             if (url.pathname == "/addName") { // Name für Reservierung in die DB
                 let objectID: Mongo.ObjectID = getID();
                 allartikel.updateOne(
@@ -123,6 +121,7 @@ export namespace AufgabeA {
         }
         _response.end();
     }
+
 
     async function connectDB(_url: string): Promise<void> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
