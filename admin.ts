@@ -29,18 +29,29 @@ namespace AufgabeA {
             artikelDiv.appendChild(artikelTitel);
 
             //Status
+            let artikelStatus: HTMLDivElement = document.createElement("div");
+            artikelStatus.innerHTML = data[i].Status; //.toLocaleString("de-DE", { currency: "EUR", style: "currency" });
+            // artikelPrice.classList.add("artikel-price");
+            artikelDiv.appendChild(artikelStatus);
 
+            //Name aus Formular
+            if (data[i].Status == "Reserviert") {
+                let artikelName: HTMLDivElement = document.createElement("div");
+                artikelName.innerHTML = data[i].Name; //.toLocaleString("de-DE", { currency: "EUR", style: "currency" });
+                // artikelPrice.classList.add("artikel-price");
+                artikelDiv.appendChild(artikelName);
+            }
 
             let ausgeliehen: HTMLButtonElement = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
             ausgeliehen.addEventListener("click", makeAusgeliehen);
-            ausgeliehen.setAttribute("Artikelname", data[i].titel);
+            ausgeliehen.setAttribute("Artikeltitel", data[i].titel);
             // ausgeliehen.setAttribute("src", "../images/abgehakt.png");
             // ausgeliehen.setAttribute("alt", "abgehakt");
             // ausgeliehen.setAttribute("class", "ArtikelDiv");
 
             let frei: HTMLButtonElement = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
             frei.addEventListener("click", makeFrei);
-            frei.setAttribute("Artikelname", data[i].titel);
+            frei.setAttribute("Artikeltitel", data[i].titel);
             // frei.setAttribute("src", "../images/abgehakt.png");
             // frei.setAttribute("alt", "abgehakt");
             // frei.setAttribute("class", "ArtikelDiv");

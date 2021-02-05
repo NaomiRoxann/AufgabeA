@@ -33,15 +33,17 @@ var AufgabeA;
             let artikelDiv = document.createElement("div#Artikel" + data);
             // artikelDiv.classList.add("artikel");
             //Checkbox
-            let checkbox = checkboxen(data);
-            // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
-            // fieldset.appendChild(checkbox);
-            // checkbox.innerText = "In die Tüte";
-            // checkbox.classList.add("artikel-btn");
-            artikelDiv.appendChild(checkbox);
-            // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
-            // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
-            // checkbox.setAttribute("preis", data.price.toString());
+            if (data[i].Status == "Frei") {
+                let checkbox = checkboxen(data);
+                // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
+                // fieldset.appendChild(checkbox);
+                // checkbox.innerText = "In die Tüte";
+                // checkbox.classList.add("artikel-btn");
+                artikelDiv.appendChild(checkbox);
+                // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
+                // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
+                // checkbox.setAttribute("preis", data.price.toString());
+            }
             //? document.getElementById(data.category + "-content")?.appendChild(artikelDiv);
             //Titel
             let artikelTitel = document.createElement("div");
@@ -65,6 +67,22 @@ var AufgabeA;
             // artikelPrice.classList.add("artikel-price");
             artikelDiv.appendChild(artikelPrice);
             //Status
+            let artikelStatus = document.createElement("div");
+            artikelStatus.innerHTML = data[i].Status; //.toLocaleString("de-DE", { currency: "EUR", style: "currency" });
+            // artikelPrice.classList.add("artikel-price");
+            artikelDiv.appendChild(artikelStatus);
+            //Checkbox
+            if (data[i].Status == "Frei") {
+                let checkbox = checkboxen(data);
+                // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
+                // fieldset.appendChild(checkbox);
+                // checkbox.innerText = "In die Tüte";
+                // checkbox.classList.add("artikel-btn");
+                artikelDiv.appendChild(checkbox);
+                // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
+                // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
+                // checkbox.setAttribute("preis", data.price.toString());
+            }
         }
     }
     //let group: HTMLElement = checkboxen(data);

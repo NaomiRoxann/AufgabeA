@@ -33,6 +33,7 @@ namespace AufgabeA {
         pic: string;
         price: number;
         Status: string;
+        Name: string;
     }
     // export interface Data {
     //     [key: string]: Artikel[];
@@ -50,16 +51,17 @@ namespace AufgabeA {
             // artikelDiv.classList.add("artikel");
 
             //Checkbox
-            let checkbox: HTMLElement = checkboxen(data);
-            // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
-            // fieldset.appendChild(checkbox);
-            // checkbox.innerText = "In die Tüte";
-            // checkbox.classList.add("artikel-btn");
-            artikelDiv.appendChild(checkbox);
-            // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
-            // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
-            // checkbox.setAttribute("preis", data.price.toString());
-
+            if (data[i].Status == "Frei") {
+                let checkbox: HTMLElement = checkboxen(data);
+                // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
+                // fieldset.appendChild(checkbox);
+                // checkbox.innerText = "In die Tüte";
+                // checkbox.classList.add("artikel-btn");
+                artikelDiv.appendChild(checkbox);
+                // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
+                // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
+                // checkbox.setAttribute("preis", data.price.toString());
+            }
             //? document.getElementById(data.category + "-content")?.appendChild(artikelDiv);
 
             //Titel
@@ -88,8 +90,23 @@ namespace AufgabeA {
             artikelDiv.appendChild(artikelPrice);
 
             //Status
+            let artikelStatus: HTMLDivElement = document.createElement("div");
+            artikelStatus.innerHTML = data[i].Status; //.toLocaleString("de-DE", { currency: "EUR", style: "currency" });
+            // artikelPrice.classList.add("artikel-price");
+            artikelDiv.appendChild(artikelStatus);
 
-
+            //Checkbox
+            if (data[i].Status == "Frei") {
+                let checkbox: HTMLElement = checkboxen(data);
+                // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
+                // fieldset.appendChild(checkbox);
+                // checkbox.innerText = "In die Tüte";
+                // checkbox.classList.add("artikel-btn");
+                artikelDiv.appendChild(checkbox);
+                // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
+                // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
+                // checkbox.setAttribute("preis", data.price.toString());
+            }
 
         }
     }

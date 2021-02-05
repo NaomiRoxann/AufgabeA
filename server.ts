@@ -1,6 +1,7 @@
 import * as Http from "http"; //Laden des Modules (Erweiterung) HTTP, um einen Server zu bauen. * = sämtliche Funktionalität laden
 import * as Url from "url"; //url kommt mit request //Aufgabe des Url Moduls ist die Aufsplittung der URl in lesbare Teile. Muss importiert werden zur Verwendung
 import * as Mongo from "mongodb";
+// import * as fileserver from "fs";
 
 import { ParsedUrlQuery } from "querystring"; //quick fix für function getID
 
@@ -55,15 +56,19 @@ export namespace AufgabeA {
             let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
             let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
             let allartikelString: string = JSON.stringify(allartikelArray);
-            _response.write(allartikelString);
+            //_response.write(allartikelString);
             //}
+
+            // var readStream = fileserver.createReadStream("./Artikel.html");
+            // // We replaced all the event handlers with a simple call to readStream.pipe()
+            // readStream.pipe(_response);
+            // _response.end(readStream);
 
             if (url.pathname == "/addName") { // Name für Reservierung in die DB
                 let objectID: Mongo.ObjectID = getID();
                 allartikel.updateOne(
                     { "_id": objectID }, { $addFields: { Name: "$name" } });
             }
-
 
             // { "_ID": OBJECTID }, { $SET: { "ANMERKUNGEN": "GESENDET" } }); // VERÄNDERT DEN WERT VON "ANMERKUNGEN" IN DER DB
 

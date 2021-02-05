@@ -1,23 +1,27 @@
 {
-  "name": "aufgabea",
+  "name": "aufgabe_a",
   "version": "1.0.0",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node GIS/aufgabe_a/server.js remote"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NaomiRoxann/AufgabeA.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/NaomiRoxann/AufgabeA/issues"
   },
   "homepage": "https://github.com/NaomiRoxann/AufgabeA#readme",
   "dependencies": {
-    "git": "^0.1.5"
+    "fs": "0.0.1-security",
+    "mongodb": "^3.6.4"
   },
-  "devDependencies": {},
-  "description": ""
+  "devDependencies": {
+    "@types/mongodb": "^3.6.5"
+  }
 }
