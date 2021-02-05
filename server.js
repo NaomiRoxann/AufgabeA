@@ -9,6 +9,28 @@ var AufgabeA;
     // interface Auswahl {
     //     [key: string]: string | string[];
     // }
+    // https://medium.com/@kellydsample/challenge-3-run-a-vanilla-js-project-in-your-browser-with-node-791e124aa2c6
+    // let html;
+    // let css;
+    // let js;
+    // fs.readFile('./Artikel.html', function (err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     html = data;
+    // });
+    // fs.readFile('./style.css', function (err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     css = data;
+    // });
+    // fs.readFile('./script.js', function (err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     js = data;
+    // });
     let port = process.env.PORT; //port anlegen //Port ist wie ein Hafen, dann können Informationen rein und raus //process.env gibt mir Informationen über meinen node Prozess,über meine Maschine/meinen Rechner | in dem Fall über den Port
     if (port == undefined) { //just in case //Hat die Maschine mir einen port zugeteilt? - suche nach port, variable
         port = 8000; //Wenn nicht dann weise den Port 8000 zu
@@ -44,7 +66,7 @@ var AufgabeA;
             let allartikeldb = allartikel.find(); //liest die einzelnen Dokumente der DB aus
             let allartikelArray = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
             let allartikelString = JSON.stringify(allartikelArray);
-            //_response.write(allartikelString);
+            _response.write(allartikelString);
             //}
             // var readStream = fileserver.createReadStream("./Artikel.html");
             // // We replaced all the event handlers with a simple call to readStream.pipe()

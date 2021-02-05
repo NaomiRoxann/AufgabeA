@@ -1,7 +1,7 @@
 import * as Http from "http"; //Laden des Modules (Erweiterung) HTTP, um einen Server zu bauen. * = sämtliche Funktionalität laden
 import * as Url from "url"; //url kommt mit request //Aufgabe des Url Moduls ist die Aufsplittung der URl in lesbare Teile. Muss importiert werden zur Verwendung
 import * as Mongo from "mongodb";
-// import * as fileserver from "fs";
+//import * as fs from "fs";
 
 import { ParsedUrlQuery } from "querystring"; //quick fix für function getID
 
@@ -11,6 +11,30 @@ export namespace AufgabeA {
     // interface Auswahl {
     //     [key: string]: string | string[];
     // }
+
+    // https://medium.com/@kellydsample/challenge-3-run-a-vanilla-js-project-in-your-browser-with-node-791e124aa2c6
+    // let html;
+    // let css;
+    // let js;
+    // fs.readFile('./Artikel.html', function (err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     html = data;
+    // });
+    // fs.readFile('./style.css', function (err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     css = data;
+    // });
+    // fs.readFile('./script.js', function (err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     js = data;
+    // });
+
 
     let port: number | string | undefined = process.env.PORT; //port anlegen //Port ist wie ein Hafen, dann können Informationen rein und raus //process.env gibt mir Informationen über meinen node Prozess,über meine Maschine/meinen Rechner | in dem Fall über den Port
     if (port == undefined) { //just in case //Hat die Maschine mir einen port zugeteilt? - suche nach port, variable
@@ -56,7 +80,7 @@ export namespace AufgabeA {
             let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
             let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
             let allartikelString: string = JSON.stringify(allartikelArray);
-            //_response.write(allartikelString);
+            _response.write(allartikelString);
             //}
 
             // var readStream = fileserver.createReadStream("./Artikel.html");
