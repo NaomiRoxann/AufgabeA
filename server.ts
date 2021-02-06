@@ -74,8 +74,11 @@ export namespace AufgabeA {
                 _response.write(html);
             }
             if (url.pathname.endsWith(".jpg")) {
-                let html: string = await fs.readFileSync("./pic/" + url.pathname, { encoding: 'utf8', flag: 'r' });
-                _response.writeHead(200, { 'Content-Type': 'image/*' });
+                let html = await fs.readFileSync("./pic/" + url.pathname);
+                if (html == null) {
+                    _response.end();
+                }
+                _response.writeHead(200, { 'Content-Type': 'image/jpeg' });
                 _response.write(html);
             }
 

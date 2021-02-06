@@ -3,16 +3,15 @@ namespace AufgabeA {
     export let form: HTMLFormElement; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
-    export let url: string = "http://localhost:8000/allArtikel";
+    export let url: string = "http://localhost:8000";
 
     //async function erhalteJSON(_url: RequestInfo): Promise<void> {
     export async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
         console.log("Init"); //x
-
         //aus db??
         // let url: string = "https://aufgabea.herokuapp.com/getArtikel";
         // let url: string = "http://localhost:8000/getArtikel";
-        let response: Response = await fetch(url); //warten bis Daten gefetched sind
+        let response: Response = await fetch(url + "/allArtikel"); //warten bis Daten gefetched sind
         let data: string = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
 
@@ -83,7 +82,12 @@ namespace AufgabeA {
             let Data2 = document.createElement("td");
             Data2.innerText = data[i].description;
             let Data3 = document.createElement("td");
-            Data3.innerText = data[i].pic;
+
+            let picOfArtikel = document.createElement("img");
+            picOfArtikel.src = url + "/" + data[i].pic;
+            picOfArtikel.width = 100;
+            picOfArtikel.height = 100;
+            Data3.appendChild(picOfArtikel);
             let Data4 = document.createElement("td");
             Data4.innerText = "€ " + data[i].price;
             let Data5 = document.createElement("td");
