@@ -1,11 +1,10 @@
 namespace AufgabeA {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
-    export let form: HTMLFormElement | null; //es gebe ein form für alle funktionen zugänglich
+    let form: HTMLFormElement; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
     export let url: string = "http://localhost:8000";
 
-    //async function erhalteJSON(_url: RequestInfo): Promise<void> {
     export async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
         console.log("Init"); //x
         //aus db??
@@ -28,7 +27,6 @@ namespace AufgabeA {
 
     }
 
-
     export interface Artikel { //Definiert was wo im array, weshalb man .this.price,... machen kann 
         titel: string;
         description: string;
@@ -37,15 +35,12 @@ namespace AufgabeA {
         Status: string;
         Name: string;
     }
-    // export interface Data {
-    //     [key: string]: Artikel[];
-    // }
-    //let data: Artikel[];
     function ArtikelLaden(data: Artikel[]): void { //funktions paramter vom typ Data bzw. Artikel Array
 
         let artikelDiv = document.getElementById("Artikel");
 
         let tableFrame = document.createElement("table");
+
         let HeadingFrame = document.createElement("tr");
 
         let firstRow = document.createElement("th");
@@ -70,7 +65,7 @@ namespace AufgabeA {
         tableFrame.appendChild(HeadingFrame);
         //console.log(data);
 
-        for (let i = 0; i < data.length; i++) { //geht über Artikel
+        for (let i: number = 0; i < data.length; i++) { //geht über Artikel
 
             let DataFrame = document.createElement("tr");
             //Checkbox
@@ -87,13 +82,18 @@ namespace AufgabeA {
             let Data3 = document.createElement("td");
             let picOfArtikel = document.createElement("img");
             picOfArtikel.src = url + "/" + data[i].pic;
-            picOfArtikel.width = 100;
-            picOfArtikel.height = 100;
             Data3.appendChild(picOfArtikel);
             let Data4 = document.createElement("td");
             Data4.innerText = "€ " + data[i].price;
             let Data5 = document.createElement("td");
+            if (data[i].Status == "Frei")
+                Data5.classList.add("frei");
+            if (data[i].Status == "Reserviert")
+                Data5.classList.add("reserviert");
+            if (data[i].Status == "Ausgeliehen")
+                Data5.classList.add("ausgeliehen");
             Data5.innerText = data[i].Status;
+
 
             DataFrame.appendChild(checkbox);
             DataFrame.appendChild(Data1);
@@ -108,7 +108,7 @@ namespace AufgabeA {
         artikelDiv.appendChild(tableFrame);
     }
 
-    function handleChange(_event: Event): void {
+    async function handleChange(_event: Event): Promise<void> {
         console.log("handleChange");
 
         showAuswahl();

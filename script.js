@@ -2,10 +2,10 @@
 var AufgabeA;
 (function (AufgabeA) {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
+    let form; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
     AufgabeA.url = "http://localhost:8000";
-    //async function erhalteJSON(_url: RequestInfo): Promise<void> {
     async function handleLoad(_event) {
         console.log("Init"); //x
         //aus db??
@@ -15,19 +15,15 @@ var AufgabeA;
         let data = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
         console.log("1"); //x
-        AufgabeA.form = document.querySelector("FormArtikel"); //form für handleLoad
+        form = document.querySelector("FormArtikel"); //form für handleLoad
         //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
         //
         console.log("2"); //x
-        AufgabeA.form.addEventListener("change", handleChange); //verändert sich die Auswahl?
+        form.addEventListener("change", handleChange); //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
         console.log("xxxtonaomixxx"); //x
     }
     AufgabeA.handleLoad = handleLoad;
-    // export interface Data {
-    //     [key: string]: Artikel[];
-    // }
-    //let data: Artikel[];
     function ArtikelLaden(data) {
         let artikelDiv = document.getElementById("Artikel");
         let tableFrame = document.createElement("table");
@@ -67,12 +63,16 @@ var AufgabeA;
             let Data3 = document.createElement("td");
             let picOfArtikel = document.createElement("img");
             picOfArtikel.src = AufgabeA.url + "/" + data[i].pic;
-            picOfArtikel.width = 100;
-            picOfArtikel.height = 100;
             Data3.appendChild(picOfArtikel);
             let Data4 = document.createElement("td");
             Data4.innerText = "€ " + data[i].price;
             let Data5 = document.createElement("td");
+            if (data[i].Status == "Frei")
+                Data5.classList.add("frei");
+            if (data[i].Status == "Reserviert")
+                Data5.classList.add("reserviert");
+            if (data[i].Status == "Ausgeliehen")
+                Data5.classList.add("ausgeliehen");
             Data5.innerText = data[i].Status;
             DataFrame.appendChild(checkbox);
             DataFrame.appendChild(Data1);
@@ -84,7 +84,7 @@ var AufgabeA;
         }
         artikelDiv.appendChild(tableFrame);
     }
-    function handleChange(_event) {
+    async function handleChange(_event) {
         console.log("handleChange");
         showAuswahl();
     }
@@ -101,7 +101,7 @@ var AufgabeA;
         let price = 0; //wir fangen bei 0 an
         let auswahl = document.querySelector("div#Auswahl"); //div für die ausgewählten Elemente
         auswahl.innerHTML = ""; //wir fangen leer an
-        let formData = new FormData(AufgabeA.form); //form info für showAuswahl
+        let formData = new FormData(form); //form info für showAuswahl
         for (let entry of formData) { //durchläuft das formular
             let selector = "[value='" + entry + "']"; // "[name='" + entry[0] + "'][value='" + entry[1] + "']"; //i dont understand
             let artikel = document.querySelector(selector); //selected artikel aus form
