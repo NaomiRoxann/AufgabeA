@@ -1,6 +1,6 @@
 namespace AufgabeA {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
-    export let form: HTMLFormElement; //es gebe ein form für alle funktionen zugänglich
+    export let form: HTMLFormElement | null; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
     export let url: string = "http://localhost:8000";
@@ -14,10 +14,13 @@ namespace AufgabeA {
         let response: Response = await fetch(url + "/allArtikel"); //warten bis Daten gefetched sind
         let data: string = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
+        console.log("1"); //x
 
         form = <HTMLFormElement>document.querySelector("FormArtikel"); //form für handleLoad
         //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
         //
+        console.log("2"); //x
+
         form.addEventListener("change", handleChange); //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
 
@@ -45,6 +48,7 @@ namespace AufgabeA {
         let tableFrame = document.createElement("table");
         let HeadingFrame = document.createElement("tr");
 
+        let firstRow = document.createElement("th");
         let Heading1 = document.createElement("th");
         Heading1.innerText = "Titel";
         let Heading2 = document.createElement("th");
@@ -56,6 +60,7 @@ namespace AufgabeA {
         let Heading5 = document.createElement("th");
         Heading5.innerText = "Status";
 
+        HeadingFrame.appendChild(firstRow);
         HeadingFrame.appendChild(Heading1);
         HeadingFrame.appendChild(Heading2);
         HeadingFrame.appendChild(Heading3);
@@ -69,20 +74,17 @@ namespace AufgabeA {
 
             let DataFrame = document.createElement("tr");
             //Checkbox
+            let checkbox: HTMLInputElement = document.createElement("input");
             if (data[i].Status == "Frei") {
-                let checkbox: HTMLInputElement = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.setAttribute("price", data[i].price.toFixed(2)); //Attribut price einführen, Fixed(2) macht 2 Nachkommastellen
                 checkbox.value = data[i].titel;
-                checkbox.id = data[i].titel;
-                DataFrame.appendChild(checkbox);
             }
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
             let Data2 = document.createElement("td");
             Data2.innerText = data[i].description;
             let Data3 = document.createElement("td");
-
             let picOfArtikel = document.createElement("img");
             picOfArtikel.src = url + "/" + data[i].pic;
             picOfArtikel.width = 100;
@@ -93,6 +95,7 @@ namespace AufgabeA {
             let Data5 = document.createElement("td");
             Data5.innerText = data[i].Status;
 
+            DataFrame.appendChild(checkbox);
             DataFrame.appendChild(Data1);
             DataFrame.appendChild(Data2);
             DataFrame.appendChild(Data3);
@@ -106,6 +109,8 @@ namespace AufgabeA {
     }
 
     function handleChange(_event: Event): void {
+        console.log("handleChange");
+
         showAuswahl();
     }
 

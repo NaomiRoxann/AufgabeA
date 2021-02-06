@@ -14,9 +14,11 @@ var AufgabeA;
         let response = await fetch(AufgabeA.url + "/allArtikel"); //warten bis Daten gefetched sind
         let data = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
+        console.log("1"); //x
         AufgabeA.form = document.querySelector("FormArtikel"); //form für handleLoad
         //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
         //
+        console.log("2"); //x
         AufgabeA.form.addEventListener("change", handleChange); //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
         console.log("xxxtonaomixxx"); //x
@@ -30,6 +32,7 @@ var AufgabeA;
         let artikelDiv = document.getElementById("Artikel");
         let tableFrame = document.createElement("table");
         let HeadingFrame = document.createElement("tr");
+        let firstRow = document.createElement("th");
         let Heading1 = document.createElement("th");
         Heading1.innerText = "Titel";
         let Heading2 = document.createElement("th");
@@ -40,6 +43,7 @@ var AufgabeA;
         Heading4.innerText = "Price";
         let Heading5 = document.createElement("th");
         Heading5.innerText = "Status";
+        HeadingFrame.appendChild(firstRow);
         HeadingFrame.appendChild(Heading1);
         HeadingFrame.appendChild(Heading2);
         HeadingFrame.appendChild(Heading3);
@@ -50,13 +54,11 @@ var AufgabeA;
         for (let i = 0; i < data.length; i++) { //geht über Artikel
             let DataFrame = document.createElement("tr");
             //Checkbox
+            let checkbox = document.createElement("input");
             if (data[i].Status == "Frei") {
-                let checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.setAttribute("price", data[i].price.toFixed(2)); //Attribut price einführen, Fixed(2) macht 2 Nachkommastellen
                 checkbox.value = data[i].titel;
-                checkbox.id = data[i].titel;
-                DataFrame.appendChild(checkbox);
             }
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
@@ -72,6 +74,7 @@ var AufgabeA;
             Data4.innerText = "€ " + data[i].price;
             let Data5 = document.createElement("td");
             Data5.innerText = data[i].Status;
+            DataFrame.appendChild(checkbox);
             DataFrame.appendChild(Data1);
             DataFrame.appendChild(Data2);
             DataFrame.appendChild(Data3);
@@ -82,6 +85,7 @@ var AufgabeA;
         artikelDiv.appendChild(tableFrame);
     }
     function handleChange(_event) {
+        console.log("handleChange");
         showAuswahl();
     }
     // async function submitAuswahl(_event: Event): Promise<void> { //async liefert promise --

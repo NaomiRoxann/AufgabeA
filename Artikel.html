@@ -13,11 +13,11 @@
         <h1>ASTA Verleih</h1>
     </header>
 
-    <form id="FormArtikel">
+    <form id="FormArtikel" method="GET">
         <!-- method="GET" - action="" - ist default -->
         <h2>Was möchtest du vorab reservieren?</h2>
         <div id="Artikel">
-
+            <legend></legend>
         </div>
     </form>
 
@@ -26,8 +26,11 @@
         <div id="Auswahl">
             ...
         </div>
-        <button type="reset" form="FormArtikel">Zurück auf 0</button> <!-- form verbindet Button mit Auswahl -->
-        <button type="button" form="FormArtikel">Reservierung abschließen</button>
+        <form action="/Checkout">
+            <button type="reset" form="FormArtikel">Zurück auf 0</button> <!-- form verbindet Button mit Auswahl -->
+            <button type="submit">Reservierung abschließen</button>
+        </form>
+        <!-- <button type="button" href="./Checkout.html" form="FormArtikel">Reservierung abschließen</button>-->
         <!-- type:submit ging nicht?? -- form verbindet Button mit Auswahl -->
     </div>
 

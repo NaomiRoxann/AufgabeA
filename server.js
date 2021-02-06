@@ -75,6 +75,10 @@ var AufgabeA;
                 let readStream = fs.readFileSync("./Artikel.html");
                 _response.write(readStream);
             }
+            if (url.pathname == "/Checkout") {
+                let readStream = fs.readFileSync("./Checkout.html");
+                _response.write(readStream);
+            }
             if (url.pathname == "/addName") { // Name für Reservierung in die DB
                 let objectID = getID();
                 allartikel.updateOne({ "_id": objectID }, { $addFields: { Name: "$name" } });
