@@ -4,8 +4,8 @@ var AufgabeA;
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
     let form; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
-    //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
-    AufgabeA.url = "http://localhost:8000";
+    AufgabeA.url = "https://aufgabea.herokuapp.com"; //serveradresse
+    //export let url: string = "http://localhost:8000";
     AufgabeA.formData = document.querySelector("FormArtikel");
     async function handleLoad(_event) {
         console.log("Init"); //x

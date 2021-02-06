@@ -4,8 +4,8 @@ var AufgabeA;
     window.addEventListener("load", getArtikel);
     // gibt Artikel aus der Datenbank aus
     async function getArtikel(_event) {
-        //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
-        let url = "http://localhost:8000";
+        let url = "https://aufgabea.herokuapp.com";
+        //let url: string = "http://localhost:8000";
         let response = await fetch(url + "/allArtikel");
         let data = await response.text(); //JSON String enthält alle DB-Einträge
         //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
