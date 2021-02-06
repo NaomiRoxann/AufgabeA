@@ -22,7 +22,8 @@ namespace AufgabeA {
         form.addEventListener("change", handleChange); //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
 
-        showAuswahl();
+        console.log("xxxtonaomixxx"); //x
+
     }
 
 
@@ -40,8 +41,7 @@ namespace AufgabeA {
     //let data: Artikel[];
     function ArtikelLaden(data: Artikel[]): void { //funktions paramter vom typ Data bzw. Artikel Array
 
-        // let artikelDiv = document.getElementById("Artikel");
-        let artikelDiv2 = document.getElementById("Artikel");
+        let artikelDiv = document.getElementById("Artikel");
 
         let tableFrame = document.createElement("table");
         let HeadingFrame = document.createElement("tr");
@@ -69,11 +69,19 @@ namespace AufgabeA {
         for (let i = 0; i < data.length; i++) { //geht über Artikel
 
             let DataFrame = document.createElement("tr");
-
+            //Checkbox
+            if (data[i].Status == "Frei") {
+                let checkbox: HTMLInputElement = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.setAttribute("price", data[i].price.toFixed(2)); //Attribut price einführen, Fixed(2) macht 2 Nachkommastellen
+                checkbox.value = data[i].titel;
+                checkbox.id = data[i].titel;
+                DataFrame.appendChild(checkbox);
+            }
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
             let Data2 = document.createElement("td");
-            Data1.innerText = data[i].description;
+            Data2.innerText = data[i].description;
             let Data3 = document.createElement("td");
             Data3.innerText = data[i].pic;
             let Data4 = document.createElement("td");
@@ -88,90 +96,9 @@ namespace AufgabeA {
             DataFrame.appendChild(Data5);
 
             tableFrame.appendChild(DataFrame);
-
-            // artikelDiv.classList.add("artikel");
-            //Checkbox
-            if (data[i].Status == "Frei") {
-                let checkbox = checkboxen(data);
-                // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
-                // fieldset.appendChild(checkbox);
-                // checkbox.innerText = "In die Tüte";
-                // checkbox.classList.add("artikel-btn");
-                Data1.appendChild(checkbox);
-                // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
-                // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
-                // checkbox.setAttribute("preis", data.price.toString());
-            }
-            //? document.getElementById(data.category + "-content")?.appendChild(artikelDiv);
-            // //Titel
-            // let artikelTitel = document.createElement("div");
-            // artikelTitel.innerText = data[i].titel;
-            // // artikelTitel.classList.add("artikel-name");
-            // artikelDiv.appendChild(artikelTitel);
-            // //Description
-            // let artikelDesc = document.createElement("div");
-            // artikelDesc.innerText = data[i].description;
-            // // artikelDesc.classList.add("artikel-desc");
-            // artikelDiv.appendChild(artikelDesc);
-            // //Pic
-            // let artikelPic = document.createElement("img");
-            // artikelPic.src = data[i].pic;
-            // // artikelPic.alt = data[i].titel;
-            // // artikelPic.classList.add("artikel-Pic");
-            // artikelDiv.appendChild(artikelPic);
-            // //Price
-            // let artikelPrice = document.createElement("div");
-            // artikelPrice.innerHTML = data[i].price.toFixed(2); //.toLocaleString("de-DE", { currency: "EUR", style: "currency" });
-            // // artikelPrice.classList.add("artikel-price");
-            // artikelDiv.appendChild(artikelPrice);
-            // //Status
-            // let artikelStatus = document.createElement("div");
-            // artikelStatus.innerHTML = data[i].Status; //.toLocaleString("de-DE", { currency: "EUR", style: "currency" });
-            // // artikelPrice.classList.add("artikel-price");
-            // artikelDiv.appendChild(artikelStatus);
-            // //Checkbox
-            // if (data[i].Status == "Frei") {
-            //     let checkbox = checkboxen(data);
-            //     // let fieldset: HTMLFieldSetElement = document.querySelector("fieldset" + data); //verbindet mit HTML
-            //     // fieldset.appendChild(checkbox);
-            //     // checkbox.innerText = "In die Tüte";
-            //     // checkbox.classList.add("artikel-btn");
-            //     artikelDiv.appendChild(checkbox);
-            //     // checkbox.addEventListener("click", zaehler.bind(data)); //Ermöglicht zugriff auf datenarray an stelle in FUnktion zähler, weil wir ja gerade an dieser stelle i in der funktion sind
-            //     // checkbox.addEventListener("click", pushLocal.bind(data)); //.bind ermöglicht dass man auf; 
-            //     // checkbox.setAttribute("preis", data.price.toString());
-            // }
         }
-        artikelDiv2.append(tableFrame);
 
-    }
-    //let group: HTMLElement = checkboxen(data);
-    function checkboxen(data: Artikel[]): HTMLElement {
-        let group: HTMLDivElement = document.createElement("div"); //neue group in func
-        for (let artikel of data) {
-            let checkbox: HTMLInputElement = document.createElement("input"); //Auswahl Kästchen erstellen, unten: mit . definieren
-            checkbox.type = "checkbox";
-            checkbox.setAttribute("price", artikel.price.toFixed(2)); //Attribut price einführen, Fixed(2) macht 2 Nachkommastellen
-            checkbox.value = artikel.titel;
-            checkbox.id = artikel.titel; //verbindet Kästchen mit Inhalt
-
-            let label: HTMLLabelElement = document.createElement("label"); //generiert die Infos vom Artikel
-            label.title = artikel.titel;
-            label.textContent = artikel.description;
-            label.textContent = artikel.pic;
-            label.textContent = artikel.price.toFixed(2);
-            label.textContent = artikel.Status;
-            label.htmlFor = artikel.titel; //verbindet Inhalt mit Kästchen
-
-            group.appendChild(checkbox); //verbindet Kästchen mit group in func
-            group.appendChild(label); //verbindet Infos mit group in func
-
-            // let PicURL: HTMLImageElement = document.createElement("Pic");
-            // PicURL.setAttribute("src", auswahl.url);
-            // PicURL.setAttribute("alt", auswahl.titel);
-            // label.appendChild(PicURL);
-        }
-        return group;
+        artikelDiv.appendChild(tableFrame);
     }
 
     function handleChange(_event: Event): void {
@@ -188,6 +115,7 @@ namespace AufgabeA {
     // }
 
     function showAuswahl(): void {
+        console.log("showauswahl");
         let price: number = 0; //wir fangen bei 0 an
         let auswahl: HTMLDivElement = <HTMLDivElement>document.querySelector("div#Auswahl"); //div für die ausgewählten Elemente
         auswahl.innerHTML = ""; //wir fangen leer an

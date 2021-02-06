@@ -69,8 +69,13 @@ export namespace AufgabeA {
             // readStream.pipe(_response);
             // _response.end(readStream);
             if (url.pathname.endsWith(".js") || url.pathname.endsWith(".css")) {
-                let html = await fs.readFileSync("./" + url.pathname, { encoding: 'utf8', flag: 'r' });
+                let html: string = await fs.readFileSync("./" + url.pathname, { encoding: 'utf8', flag: 'r' });
                 _response.writeHead(200, { 'Content-Type': url.pathname.endsWith(".js") ? 'text/javascript' : 'text/css' });
+                _response.write(html);
+            }
+            if (url.pathname.endsWith(".jpg")) {
+                let html: string = await fs.readFileSync("./pic/" + url.pathname, { encoding: 'utf8', flag: 'r' });
+                _response.writeHead(200, { 'Content-Type': 'image/*' });
                 _response.write(html);
             }
 

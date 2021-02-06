@@ -57,6 +57,11 @@ var AufgabeA;
                 _response.writeHead(200, { 'Content-Type': url.pathname.endsWith(".js") ? 'text/javascript' : 'text/css' });
                 _response.write(html);
             }
+            if (url.pathname.endsWith(".jpg")) {
+                let html = await fs.readFileSync("./pic/" + url.pathname, { encoding: 'utf8', flag: 'r' });
+                _response.writeHead(200, { 'Content-Type': 'image/*' });
+                _response.write(html);
+            }
             if (url.pathname == "/allArtikel") { // Name für Reservierung in die DB
                 let allartikeldb = allartikel.find(); //liest die einzelnen Dokumente der DB aus
                 let allartikelArray = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
