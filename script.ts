@@ -40,6 +40,7 @@ namespace AufgabeA {
         let artikelDiv = document.getElementById("Artikel");
 
         let tableFrame = document.createElement("table");
+        tableFrame.classList.add("table");
 
         let HeadingFrame = document.createElement("tr");
 
@@ -111,7 +112,7 @@ namespace AufgabeA {
 
     function handleChange(_event: Event): void {
         showAuswahl();
-        console.log("summe =" + getSumme())
+
     }
 
     // async function submitAuswahl(_event: Event): Promise<void> { //async liefert promise --
@@ -123,24 +124,7 @@ namespace AufgabeA {
     //     alert(responseText);
     // }
 
-    function getSumme(): number {
-        let summe = 0;
-        let alleArtikelForm = document.getElementById("Artikel");
-        for (let i = 1; i < alleArtikelForm.children[0].children.length; i++) {
-            let elementAuswahl = alleArtikelForm.children[0].children[i];
-            if (elementAuswahl != null) {
-                let checkBox = elementAuswahl.children[0] as HTMLInputElement;
-                if (checkBox.checked) {
 
-                    var price = parseFloat(elementAuswahl.children[0].getAttribute("price"));
-                    summe = summe + price;
-                }
-
-            }
-        }
-
-        return summe;
-    }
 
     function showAuswahl(): void {
         console.log("showauswahl");
@@ -155,17 +139,52 @@ namespace AufgabeA {
             let artikel: HTMLInputElement = <HTMLInputElement>document.querySelector(selector); //selected artikel aus form
             let artikelPrice: number = Number(artikel.getAttribute("price")); //preis abfragen //Number() macht aus string number, parseFloat didnt work??
 
-            auswahl.innerHTML += artikel.value + ": " + artikelPrice.toFixed(2) + " €" + "<br>"; //Preis ausgeben
+            auswahl.innerHTML += getAuswahl(); //Preis ausgeben
 
             price += artikelPrice;
             localStorage.setItem("selected", JSON.stringify(auswahl.innerHTML)); //speichert als string weil an den local storage nur ein string übergeben werden kann //Storage speicher is key //json.stringify is value
 
         }
 
-        auswahl.innerHTML += "Summe: : €" + price.toFixed(2); //Summe ausgeben
+        auswahl.innerHTML += "Summe: €" + getSumme(); //Summe ausgeben
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
     }
 
+    function getSumme(): number {
+        let summe = 0;
+        let artikelDiv = document.getElementById("Artikel");
+        for (let i = 1; i < artikelDiv.children[0].children.length; i++) {
+            let tr = artikelDiv.children[0].children[i];
+            if (tr != null) {
+                let checkBox: HTMLInputElement = tr.children[0] as HTMLInputElement;//?
+                if (checkBox.checked) {
+                    let price = parseFloat(tr.children[0].getAttribute("price"));
+                    summe = summe + price;
+                }
+
+            }
+
+        }
+        return summe;
+    }
+    function getAuswahl(): string {
+        let Auswahl = "";
+        let artikelDiv = document.getElementById("Artikel");
+        for (let i = 1; i < artikelDiv.children[0].children.length; i++) {
+            let tr = artikelDiv.children[0].children[i];
+            if (tr != null) {
+                let checkBox: HTMLInputElement = tr.children[0] as HTMLInputElement;//?
+                if (checkBox.checked) {
+                    let titel = tr.children[0].getAttribute("titel");
+                    let price = tr.children[0].getAttribute("price");
+                    Auswahl += titel + " " + JSON.stringify(price + " €");
+                }
+
+            }
+            localStorage.setItem("selected", Auswahl);
+        }
+        return Auswahl;
+    }
 
 
 }
