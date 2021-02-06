@@ -77,7 +77,7 @@ namespace AufgabeA {
             let Data3 = document.createElement("td");
             Data3.innerText = data[i].pic;
             let Data4 = document.createElement("td");
-            Data4.innerText = data[i].price;
+            Data4.innerText = "€ " + data[i].price;
             let Data5 = document.createElement("td");
             Data5.innerText = data[i].Status;
 
