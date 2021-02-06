@@ -6,6 +6,7 @@ var AufgabeA;
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
     AufgabeA.url = "http://localhost:8000";
+    AufgabeA.formData = document.querySelector("FormArtikel");
     async function handleLoad(_event) {
         console.log("Init"); //x
         //aus db??
@@ -15,13 +16,12 @@ var AufgabeA;
         let data = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
         console.log("1"); //x
-        form = document.querySelector("FormArtikel"); //form für handleLoad
         //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
         //
         console.log("2"); //x
-        form.addEventListener("change", handleChange); //verändert sich die Auswahl?
+        //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
-        console.log("xxxtonaomixxx"); //x
+        console.log("xxxtoxxx"); //x
     }
     AufgabeA.handleLoad = handleLoad;
     function ArtikelLaden(data) {
@@ -83,10 +83,11 @@ var AufgabeA;
             tableFrame.appendChild(DataFrame);
         }
         artikelDiv.appendChild(tableFrame);
+        artikelDiv.addEventListener("change", handleChange);
     }
-    async function handleChange(_event) {
-        console.log("handleChange");
+    function handleChange(_event) {
         showAuswahl();
+        console.log("summe =" + getSumme());
     }
     // async function submitAuswahl(_event: Event): Promise<void> { //async liefert promise --
     //     console.log("submit Auswahl"); //x
@@ -96,6 +97,21 @@ var AufgabeA;
     //     let responseText: string = await response.text(); //brauch ich das alles überhaupt?
     //     alert(responseText);
     // }
+    function getSumme() {
+        let summe = 0;
+        let alleArtikelForm = document.getElementById("Artikel");
+        for (let i = 1; i < alleArtikelForm.children[0].children.length; i++) {
+            let elementAuswahl = alleArtikelForm.children[0].children[i];
+            if (elementAuswahl != null) {
+                let checkBox = elementAuswahl.children[0];
+                if (checkBox.checked) {
+                    var price = parseFloat(elementAuswahl.children[0].getAttribute("price"));
+                    summe = summe + price;
+                }
+            }
+        }
+        return summe;
+    }
     function showAuswahl() {
         console.log("showauswahl");
         let price = 0; //wir fangen bei 0 an

@@ -5,8 +5,8 @@ var AufgabeA;
     // gibt Artikel aus der Datenbank aus
     async function getArtikel(_event) {
         //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
-        // let url: string = "http://localhost:8000/getArtikel";
-        let response = await fetch(AufgabeA.url + "./allArtikel");
+        let url = "http://localhost:8000";
+        let response = await fetch(url + "/allArtikel");
         let data = await response.text(); //JSON String enthält alle DB-Einträge
         //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
         //let Artikel: Artikel[] = await response.json(); //oder so

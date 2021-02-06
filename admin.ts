@@ -6,8 +6,8 @@ namespace AufgabeA {
     async function getArtikel(_event: Event): Promise<void> {
 
         //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
-        // let url: string = "http://localhost:8000/getArtikel";
-        let response: Response = await fetch(url + "./allArtikel");
+        let url: string = "http://localhost:8000";
+        let response: Response = await fetch(url + "/allArtikel");
         let data: string = await response.text(); //JSON String enthält alle DB-Einträge
         //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
         //let Artikel: Artikel[] = await response.json(); //oder so

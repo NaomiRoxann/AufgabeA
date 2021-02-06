@@ -4,6 +4,7 @@ namespace AufgabeA {
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
     export let url: string = "http://localhost:8000";
+    export let formData = <HTMLFormElement>document.querySelector("FormArtikel");
 
     export async function handleLoad(_event: Event): Promise<void> { //async liefert promise -- was passiert wenn die Seite geladen ist? folgendes:
         console.log("Init"); //x
@@ -15,15 +16,14 @@ namespace AufgabeA {
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
         console.log("1"); //x
 
-        form = <HTMLFormElement>document.querySelector("FormArtikel"); //form für handleLoad
         //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
         //
         console.log("2"); //x
 
-        form.addEventListener("change", handleChange); //verändert sich die Auswahl?
+        //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
 
-        console.log("xxxtonaomixxx"); //x
+        console.log("xxxtoxxx"); //x
 
     }
 
@@ -106,12 +106,12 @@ namespace AufgabeA {
         }
 
         artikelDiv.appendChild(tableFrame);
+        artikelDiv.addEventListener("change", handleChange);
     }
 
-    async function handleChange(_event: Event): Promise<void> {
-        console.log("handleChange");
-
+    function handleChange(_event: Event): void {
         showAuswahl();
+        console.log("summe =" + getSumme())
     }
 
     // async function submitAuswahl(_event: Event): Promise<void> { //async liefert promise --
@@ -122,6 +122,25 @@ namespace AufgabeA {
     //     let responseText: string = await response.text(); //brauch ich das alles überhaupt?
     //     alert(responseText);
     // }
+
+    function getSumme(): number {
+        let summe = 0;
+        let alleArtikelForm = document.getElementById("Artikel");
+        for (let i = 1; i < alleArtikelForm.children[0].children.length; i++) {
+            let elementAuswahl = alleArtikelForm.children[0].children[i];
+            if (elementAuswahl != null) {
+                let checkBox = elementAuswahl.children[0] as HTMLInputElement;
+                if (checkBox.checked) {
+
+                    var price = parseFloat(elementAuswahl.children[0].getAttribute("price"));
+                    summe = summe + price;
+                }
+
+            }
+        }
+
+        return summe;
+    }
 
     function showAuswahl(): void {
         console.log("showauswahl");

@@ -47,7 +47,7 @@ export namespace AufgabeA {
                 _response.write(html);
             }
 
-            if (url.pathname == "./allArtikel") { // Name für Reservierung in die DB
+            if (url.pathname == "/allArtikel") { // Name für Reservierung in die DB
                 let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
                 let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
                 let allartikelString: string = JSON.stringify(allartikelArray);
