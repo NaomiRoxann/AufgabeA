@@ -41,6 +41,7 @@ var AufgabeA;
                 checkbox.setAttribute("id", data[i]._id);
                 checkbox.setAttribute("name", "cb" + data[i].titel);
                 checkbox.value = data[i].titel;
+                checkbox.classList.add("checkbox");
             }
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
