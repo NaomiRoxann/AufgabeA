@@ -34,7 +34,7 @@ var AufgabeA;
                 if (html == null) {
                     _response.end();
                 }
-                _response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+                _response.writeHead(200, { 'Content-Type': 'image/jpeg' }); //200 -> HTTP Statuscode
                 _response.write(html);
             }
             if (url.pathname == "/allArtikel") { // Name für Reservierung in die DB
@@ -56,10 +56,10 @@ var AufgabeA;
                 _response.write(resp);
             }
             if (url.pathname == "/makeReserviert") { // Name für Reservierung in die DB
-                let ids = url.query.ids;
-                let name = url.query.name;
+                let ids = url.query.ids; // 1,2,3,5
+                let name = url.query.name; //Peter
                 console.log("makeReserviert", ids, name);
-                let idArray = ids.split(",");
+                let idArray = ids.split(","); // ["1", "2", "3", "5"]
                 for (let id of idArray) {
                     console.log("loop", id);
                     await allartikel.updateOne({ _id: parseInt(id) }, { $set: { Status: "Reserviert", Name: name } });

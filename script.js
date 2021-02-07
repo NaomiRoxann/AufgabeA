@@ -121,45 +121,13 @@ var AufgabeA;
             let id = Number(artikel.getAttribute("id"));
             ids.push(id);
             selected.push(entry);
-            auswahl.innerHTML += getAuswahl(); //Preis ausgeben
             price += artikelPrice;
         }
         localStorage.setItem("ids", ids.join(","));
         localStorage.setItem("selected", selected.join(","));
-        auswahl.innerHTML += "Summe: €" + getSumme(); //Summe ausgeben
+        auswahl.innerHTML += selected.join(",") + "<br>";
+        auswahl.innerHTML += "Summe: €" + price.toFixed(2); //Summe ausgeben
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
-    }
-    function getSumme() {
-        let summe = 0;
-        let artikelDiv = document.getElementById("Artikel");
-        for (let i = 1; i < artikelDiv.children[0].children.length; i++) {
-            let tr = artikelDiv.children[0].children[i];
-            if (tr != null) {
-                let checkBox = tr.children[0]; //?
-                if (checkBox.checked) {
-                    let price = parseFloat(tr.children[0].getAttribute("price"));
-                    summe = summe + price;
-                }
-            }
-        }
-        return summe;
-    }
-    function getAuswahl() {
-        let Auswahl = "";
-        let artikelDiv = document.getElementById("Artikel");
-        for (let i = 1; i < artikelDiv.children[0].children.length; i++) {
-            let tr = artikelDiv.children[0].children[i];
-            if (tr != null) {
-                let checkBox = tr.children[0]; //?
-                if (checkBox.checked) {
-                    let titel = tr.children[0].getAttribute("value");
-                    let price = tr.children[0].getAttribute("price");
-                    Auswahl += titel + " " + JSON.stringify(price + " €");
-                }
-            }
-            //localStorage.setItem("selected", Auswahl);
-        }
-        return Auswahl;
     }
 })(AufgabeA || (AufgabeA = {}));
 //# sourceMappingURL=script.js.map

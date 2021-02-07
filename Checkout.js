@@ -31,12 +31,10 @@ var AufgabeA;
         //   auswahl += localKey + "=" + localValue + "&";  // LocalStorage in URL Form
         //}
         /// irgendwas das name ändert ?
-        let formData = new FormData(document.forms[0]);
         // let serverURL: string = "https://aufgabea.herokuapp.com";
         // let serverURL: string = "http://localhost:8100";
         // tslint:disable-next-line: no-any
         let query = new URLSearchParams();
-        console.log(formData);
         query.append("ids", localStorage.getItem("ids"));
         query.append("name", checkoutName.value);
         //console.log(query);

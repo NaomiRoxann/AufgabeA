@@ -3,8 +3,6 @@ import * as Url from "url"; //url kommt mit request //Aufgabe des Url Moduls ist
 import * as Mongo from "mongodb";
 import * as fs from "fs";
 
-import { ParsedUrlQuery } from "querystring"; //quick fix für function getID
-
 
 export namespace AufgabeA {
 
@@ -44,7 +42,7 @@ export namespace AufgabeA {
                 if (html == null) {
                     _response.end();
                 }
-                _response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+                _response.writeHead(200, { 'Content-Type': 'image/jpeg' }); //200 -> HTTP Statuscode
                 _response.write(html);
             }
 
@@ -69,10 +67,10 @@ export namespace AufgabeA {
             }
 
             if (url.pathname == "/makeReserviert") { // Name für Reservierung in die DB
-                let ids: string = <string>url.query.ids;
-                let name = url.query.name;
+                let ids: string = <string>url.query.ids; // 1,2,3,5
+                let name = url.query.name; //Peter
                 console.log("makeReserviert", ids, name);
-                let idArray = ids.split(",");
+                let idArray = ids.split(","); // ["1", "2", "3", "5"]
                 for (let id of idArray) {
                     console.log("loop", id);
                     await allartikel.updateOne(

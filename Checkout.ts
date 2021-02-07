@@ -41,12 +41,11 @@ namespace AufgabeA {
         //}
 
         /// irgendwas das name ändert ?
-        let formData: FormData = new FormData(document.forms[0]);
         // let serverURL: string = "https://aufgabea.herokuapp.com";
         // let serverURL: string = "http://localhost:8100";
         // tslint:disable-next-line: no-any
         let query: URLSearchParams = new URLSearchParams();
-        console.log(formData);
+
         query.append("ids", localStorage.getItem("ids"));
         query.append("name", checkoutName.value);
         //console.log(query);
