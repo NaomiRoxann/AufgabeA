@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AufgabeA = void 0;
 const Http = require("http"); //Laden des Modules (Erweiterung) HTTP, um einen Server zu bauen. * = sämtliche Funktionalität laden
 const Url = require("url"); //url kommt mit request //Aufgabe des Url Moduls ist die Aufsplittung der URl in lesbare Teile. Muss importiert werden zur Verwendung
-const Mongo = require("mongodb");
+const mongodb_1 = require("mongodb");
 const fs = require("fs");
 var AufgabeA;
 (function (AufgabeA) {
@@ -78,7 +78,7 @@ var AufgabeA;
     }
     async function connectDB(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
-        let Client = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
+        let Client = new mongodb_1.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await Client.connect(); //Promise zu verbinden
         allartikel = Client.db("gisAufgabe").collection("Artikel");
         console.log("Database connection ", allartikel != undefined); //x

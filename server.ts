@@ -1,6 +1,6 @@
 import * as Http from "http"; //Laden des Modules (Erweiterung) HTTP, um einen Server zu bauen. * = sämtliche Funktionalität laden
 import * as Url from "url"; //url kommt mit request //Aufgabe des Url Moduls ist die Aufsplittung der URl in lesbare Teile. Muss importiert werden zur Verwendung
-import * as Mongo from "mongodb";
+import { Collection, MongoClient, Cursor, MongoClientOptions } from "mongodb";
 import * as fs from "fs";
 
 
@@ -17,7 +17,7 @@ export namespace AufgabeA {
     server.addListener("request", handleRequest); //kam ein request vom server? //Wenn Server eine Request erhält, dann rufe handleRequest() auf
 
     let dbUrl = "mongodb+srv://Naomi:bitch2021@cluster0.stmjt.mongodb.net/gisAufgabe?retryWrites=true&w=majority";
-    let allartikel: Mongo.Collection;
+    let allartikel: Collection;
     connectDB(dbUrl); //extra funktion weil async
 
 
@@ -47,7 +47,7 @@ export namespace AufgabeA {
             }
 
             if (url.pathname == "/allArtikel") { // Name für Reservierung in die DB
-                let allartikeldb: Mongo.Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
+                let allartikeldb: Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
                 let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
                 let allartikelString: string = JSON.stringify(allartikelArray);
                 _response.write(allartikelString);
@@ -96,8 +96,8 @@ export namespace AufgabeA {
 
 
     async function connectDB(_url: string): Promise<void> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
-        let Client: Mongo.MongoClient = new Mongo.MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
+        let options: MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; // GOOGLE
+        let Client: MongoClient = new MongoClient(_url, options); //neues Mongo Objekt OPTIONS GOOGLEN
         await Client.connect(); //Promise zu verbinden
         allartikel = Client.db("gisAufgabe").collection("Artikel");
         console.log("Database connection ", allartikel != undefined); //x
