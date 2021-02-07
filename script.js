@@ -4,7 +4,7 @@ var AufgabeA;
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
     // let url: string = "index.html";
     //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
-    AufgabeA.url = "http://localhost:8000";
+    AufgabeA.url = "https://aufgabea.herokuapp.com";
     async function handleLoad(_event) {
         console.log("Init"); //x
         //aus db??

@@ -28,7 +28,7 @@ namespace AufgabeA {
     async function handleSubmit(evt: MouseEvent): Promise<void> { // auswahl aus LocalStorage in DB speichern, Formulardaten mitsenden
         evt.preventDefault();
         //let auswahl: string = "";
-        let url: string = "http://localhost:8000";
+        let url: string = "https://aufgabea.herokuapp.com";
 
         let checkoutName: HTMLInputElement = document.getElementById("checkout-name") as HTMLInputElement;
 

@@ -21,7 +21,7 @@ var AufgabeA;
     async function handleSubmit(evt) {
         evt.preventDefault();
         //let auswahl: string = "";
-        let url = "http://localhost:8000";
+        let url = "https://aufgabea.herokuapp.com";
         let checkoutName = document.getElementById("checkout-name");
         //gibt selected und summe
         //for (let index: number = 0; index < localStorage.length; index++) {

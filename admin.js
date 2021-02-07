@@ -1,12 +1,12 @@
 "use strict";
 var AufgabeA;
 (function (AufgabeA) {
-    let url = "http://localhost:8000";
+    let url = "https://aufgabea.herokuapp.com";
     window.addEventListener("load", getArtikel);
     // gibt Artikel aus der Datenbank aus
     async function getArtikel() {
         //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
-        let url = "http://localhost:8000";
+        let url = "https://aufgabea.herokuapp.com";
         let response = await fetch(url + "/allArtikel");
         let data = await response.text(); //JSON String enthält alle DB-Einträge
         //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
