@@ -2,11 +2,9 @@
 var AufgabeA;
 (function (AufgabeA) {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
-    let form; //es gebe ein form für alle funktionen zugänglich
     // let url: string = "index.html";
-    AufgabeA.url = "https://aufgabea.herokuapp.com"; //serveradresse
-    //export let url: string = "http://localhost:8000";
-    AufgabeA.formData = document.querySelector("FormArtikel");
+    //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
+    AufgabeA.url = "http://localhost:8000";
     async function handleLoad(_event) {
         console.log("Init"); //x
         //aus db??
@@ -19,6 +17,7 @@ var AufgabeA;
         //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
         //
         console.log("2"); //x
+        AufgabeA.form = document.getElementById("FormArtikel");
         //verändert sich die Auswahl?
         //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
         console.log("xxxtoxxx"); //x
@@ -51,10 +50,13 @@ var AufgabeA;
         for (let i = 0; i < data.length; i++) { //geht über Artikel
             let DataFrame = document.createElement("tr");
             //Checkbox
-            let checkbox = document.createElement("input");
+            let checkbox;
             if (data[i].Status == "Frei") {
+                checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.setAttribute("price", data[i].price.toFixed(2)); //Attribut price einführen, Fixed(2) macht 2 Nachkommastellen
+                checkbox.setAttribute("id", data[i]._id);
+                checkbox.setAttribute("name", "cb" + data[i].titel);
                 checkbox.value = data[i].titel;
             }
             let Data1 = document.createElement("td");
@@ -75,7 +77,9 @@ var AufgabeA;
             if (data[i].Status == "Ausgeliehen")
                 Data5.classList.add("ausgeliehen");
             Data5.innerText = data[i].Status;
-            DataFrame.appendChild(checkbox);
+            if (checkbox) {
+                DataFrame.appendChild(checkbox);
+            }
             DataFrame.appendChild(Data1);
             DataFrame.appendChild(Data2);
             DataFrame.appendChild(Data3);
@@ -102,15 +106,26 @@ var AufgabeA;
         let price = 0; //wir fangen bei 0 an
         let auswahl = document.querySelector("div#Auswahl"); //div für die ausgewählten Elemente
         auswahl.innerHTML = ""; //wir fangen leer an
-        let formData = new FormData(form); //form info für showAuswahl
-        for (let entry of formData) { //durchläuft das formular
+        let formData = new FormData(AufgabeA.form); //form info für showAuswahl
+        console.log("form:", AufgabeA.form);
+        console.log(formData);
+        localStorage.setItem("selected", "");
+        localStorage.setItem("ids", "");
+        let ids = [];
+        let selected = [];
+        for (let entry of formData.values()) { //durchläuft das formular
+            console.log(entry);
             let selector = "[value='" + entry + "']"; // "[name='" + entry[0] + "'][value='" + entry[1] + "']"; //i dont understand
             let artikel = document.querySelector(selector); //selected artikel aus form
             let artikelPrice = Number(artikel.getAttribute("price")); //preis abfragen //Number() macht aus string number, parseFloat didnt work??
+            let id = Number(artikel.getAttribute("id"));
+            ids.push(id);
+            selected.push(entry);
             auswahl.innerHTML += getAuswahl(); //Preis ausgeben
             price += artikelPrice;
-            localStorage.setItem("selected", JSON.stringify(auswahl.innerHTML)); //speichert als string weil an den local storage nur ein string übergeben werden kann //Storage speicher is key //json.stringify is value
         }
+        localStorage.setItem("ids", ids.join(","));
+        localStorage.setItem("selected", selected.join(","));
         auswahl.innerHTML += "Summe: €" + getSumme(); //Summe ausgeben
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
     }
@@ -137,12 +152,12 @@ var AufgabeA;
             if (tr != null) {
                 let checkBox = tr.children[0]; //?
                 if (checkBox.checked) {
-                    let titel = tr.children[0].getAttribute("titel");
+                    let titel = tr.children[0].getAttribute("value");
                     let price = tr.children[0].getAttribute("price");
                     Auswahl += titel + " " + JSON.stringify(price + " €");
                 }
             }
-            localStorage.setItem("selected", Auswahl);
+            //localStorage.setItem("selected", Auswahl);
         }
         return Auswahl;
     }

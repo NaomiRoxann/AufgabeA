@@ -1,12 +1,13 @@
 namespace AufgabeA {
 
+    let url: string = "http://localhost:8000";
     window.addEventListener("load", getArtikel);
 
     // gibt Artikel aus der Datenbank aus
-    async function getArtikel(_event: Event): Promise<void> {
+    async function getArtikel(): Promise<void> {
 
-        let url: string = "https://aufgabea.herokuapp.com";
-        //let url: string = "http://localhost:8000";
+        //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
+        let url: string = "http://localhost:8000";
         let response: Response = await fetch(url + "/allArtikel");
         let data: string = await response.text(); //JSON String enthält alle DB-Einträge
         //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
@@ -16,6 +17,7 @@ namespace AufgabeA {
     function ArtikelLaden(data: Artikel[]): void {
 
         let artikelDiv = document.getElementById("Artikel");
+        artikelDiv.innerHTML = ""; //Element leer machen, damit man es immer wieder neu erzeugen kann
 
         let tableFrame = document.createElement("table");
 
@@ -49,12 +51,14 @@ namespace AufgabeA {
             if (data[i].Status == "Reserviert") {
                 Data6.innerHTML = data[i].Name;
                 let ausgeliehen: HTMLButtonElement = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
-                ausgeliehen.addEventListener("click", makeAusgeliehen);
+                ausgeliehen.addEventListener("click", () => makeAusgeliehen(data[i]._id));
+                ausgeliehen.innerHTML = "Auf ausgeliehen setzen";
                 Data7.appendChild(ausgeliehen);
             }
             if (data[i].Status == "Ausgeliehen") {
                 let frei: HTMLButtonElement = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
-                frei.addEventListener("click", makeFrei);
+                frei.addEventListener("click", () => makeFrei(data[i]._id));
+                frei.innerHTML = "Auf frei setzen.";
                 Data7.appendChild(frei);
             }
 
@@ -69,22 +73,16 @@ namespace AufgabeA {
 
     }
 
-    async function makeAusgeliehen(_event: Event): Promise<void> { // verändert DB-Eintrag - Status: gesendet
-        let clickedButton: HTMLElement = <HTMLElement>_event.target;
-        let ArtikelID: string = <string>clickedButton.getAttribute("Data6");
-        //let url: string = "https://aufgabea.herokuapp.com";
-        // let url: string = "http://localhost:8000";
-        url += "/makeAusgeliehen" + "?" + "id=" + ArtikelID;
-        await fetch(url);
-        //update();
+    async function makeAusgeliehen(id: string): Promise<void> { // verändert DB-Eintrag - Status: gesendet
+        let fetchUrl = url + "/makeAusgeliehen?" + "id=" + id;
+        await fetch(fetchUrl);
+        await getArtikel();
     }
-    async function makeFrei(_event: Event): Promise<void> { // verändert DB-Eintrag - Status: gesendet
-        let clickedButton: HTMLElement = <HTMLElement>_event.target;
-        let ArtikelID: string = <string>clickedButton.getAttribute("Data6");
+    async function makeFrei(id: string): Promise<void> { // verändert DB-Eintrag - Status: gesendet
         //let url: string = "https://aufgabea.herokuapp.com";
         // let url: string = "http://localhost:8000";
-        url += "/makeFrei" + "?" + "id=" + ArtikelID;
-        await fetch(url);
-        //update();
+        let fetchUrl = url + "/makeFrei?" + "id=" + id;
+        await fetch(fetchUrl);
+        await getArtikel();
     }
 }

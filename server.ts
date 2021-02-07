@@ -19,9 +19,10 @@ export namespace AufgabeA {
     server.addListener("request", handleRequest); //kam ein request vom server? //Wenn Server eine Request erhält, dann rufe handleRequest() auf
 
     let dbUrl = "mongodb+srv://Naomi:bitch2021@cluster0.stmjt.mongodb.net/gisAufgabe?retryWrites=true&w=majority";
+    let allartikel: Mongo.Collection;
     connectDB(dbUrl); //extra funktion weil async
 
-    let allartikel: Mongo.Collection;
+
 
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> { //request gibt 2 Parameter, incoming&response
 
@@ -67,35 +68,29 @@ export namespace AufgabeA {
                 _response.write(resp);
             }
 
-            if (url.pathname == "/addName") { // Name für Reservierung in die DB
-                let objectID: Mongo.ObjectID = getID();
-                allartikel.updateOne(
-                    { "_id": objectID }, { $addFields: { Name: "$name" } });
-            }
-
             if (url.pathname == "/makeReserviert") { // Name für Reservierung in die DB
-                let objectID: Mongo.ObjectID = getID();
-                allartikel.updateOne(
-                    { "_id": objectID }, { $set: { Status: "Reserviert" } });
+                let ids: string = <string>url.query.ids;
+                let name = url.query.name;
+                console.log("makeReserviert", ids, name);
+                let idArray = ids.split(",");
+                for (let id of idArray) {
+                    console.log("loop", id);
+                    await allartikel.updateOne(
+                        { _id: parseInt(id) }, { $set: { Status: "Reserviert", Name: name } });
+                }
+
             }
 
             if (url.pathname == "/makeAusgeliehen") { // Name für Reservierung in die DB
-                let objectID: Mongo.ObjectID = getID();
-                allartikel.updateOne(
-                    { "_id": objectID }, { $set: { Status: "Ausgeliehen" } });
+                let id: number = parseInt(<string>url.query.id);
+                await allartikel.updateOne(
+                    { "_id": id }, { $set: { Status: "Ausgeliehen" } });
             }
 
             if (url.pathname == "/makeFrei") { // Name für Reservierung in die DB
-                let objectID: Mongo.ObjectID = getID();
-                allartikel.updateOne(
-                    { "_id": objectID }, { $set: { Status: "Frei" } });
-            }
-
-            function getID(): Mongo.ObjectID { // damit Dokument über ID gefunden werden kann
-                let query: ParsedUrlQuery = url.query;
-                let id: string = <string>query["id"];   // richtigen URL-Teil auswählen
-                let objectID: Mongo.ObjectID = new Mongo.ObjectID(id);
-                return objectID;
+                let id: number = parseInt(<string>url.query.id);
+                await allartikel.updateOne(
+                    { "_id": id }, { $set: { Status: "Frei", Name: "" } });
             }
         }
         _response.end();

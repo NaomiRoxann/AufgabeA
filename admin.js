@@ -1,11 +1,12 @@
 "use strict";
 var AufgabeA;
 (function (AufgabeA) {
+    let url = "http://localhost:8000";
     window.addEventListener("load", getArtikel);
     // gibt Artikel aus der Datenbank aus
-    async function getArtikel(_event) {
-        let url = "https://aufgabea.herokuapp.com";
-        //let url: string = "http://localhost:8000";
+    async function getArtikel() {
+        //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
+        let url = "http://localhost:8000";
         let response = await fetch(url + "/allArtikel");
         let data = await response.text(); //JSON String enthält alle DB-Einträge
         //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
@@ -14,6 +15,7 @@ var AufgabeA;
     }
     function ArtikelLaden(data) {
         let artikelDiv = document.getElementById("Artikel");
+        artikelDiv.innerHTML = ""; //Element leer machen, damit man es immer wieder neu erzeugen kann
         let tableFrame = document.createElement("table");
         let HeadingFrame = document.createElement("tr");
         let Heading1 = document.createElement("th");
@@ -40,12 +42,14 @@ var AufgabeA;
             if (data[i].Status == "Reserviert") {
                 Data6.innerHTML = data[i].Name;
                 let ausgeliehen = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
-                ausgeliehen.addEventListener("click", makeAusgeliehen);
+                ausgeliehen.addEventListener("click", () => makeAusgeliehen(data[i]._id));
+                ausgeliehen.innerHTML = "Auf ausgeliehen setzen";
                 Data7.appendChild(ausgeliehen);
             }
             if (data[i].Status == "Ausgeliehen") {
                 let frei = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
-                frei.addEventListener("click", makeFrei);
+                frei.addEventListener("click", () => makeFrei(data[i]._id));
+                frei.innerHTML = "Auf frei setzen.";
                 Data7.appendChild(frei);
             }
             DataFrame.appendChild(Data1);
@@ -56,23 +60,17 @@ var AufgabeA;
         }
         artikelDiv.appendChild(tableFrame);
     }
-    async function makeAusgeliehen(_event) {
-        let clickedButton = _event.target;
-        let ArtikelID = clickedButton.getAttribute("Data6");
-        //let url: string = "https://aufgabea.herokuapp.com";
-        // let url: string = "http://localhost:8000";
-        AufgabeA.url += "/makeAusgeliehen" + "?" + "id=" + ArtikelID;
-        await fetch(AufgabeA.url);
-        //update();
+    async function makeAusgeliehen(id) {
+        let fetchUrl = url + "/makeAusgeliehen?" + "id=" + id;
+        await fetch(fetchUrl);
+        await getArtikel();
     }
-    async function makeFrei(_event) {
-        let clickedButton = _event.target;
-        let ArtikelID = clickedButton.getAttribute("Data6");
+    async function makeFrei(id) {
         //let url: string = "https://aufgabea.herokuapp.com";
         // let url: string = "http://localhost:8000";
-        AufgabeA.url += "/makeFrei" + "?" + "id=" + ArtikelID;
-        await fetch(AufgabeA.url);
-        //update();
+        let fetchUrl = url + "/makeFrei?" + "id=" + id;
+        await fetch(fetchUrl);
+        await getArtikel();
     }
 })(AufgabeA || (AufgabeA = {}));
 //# sourceMappingURL=admin.js.map
