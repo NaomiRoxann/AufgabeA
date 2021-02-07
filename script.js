@@ -1,12 +1,13 @@
 "use strict";
 var AufgabeA;
 (function (AufgabeA) {
-    window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
+    window.addEventListener("load", handleLoad);
+    auf;
     AufgabeA.url = "https://aufgabea.herokuapp.com";
     async function handleLoad(_event) {
-        let response = await fetch(AufgabeA.url + "/allArtikel"); //warten bis Daten gefetched sind
-        let data = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
-        ArtikelLaden(JSON.parse(data)); //Daten übersetzen
+        let response = await fetch(AufgabeA.url + "/allArtikel");
+        let data = await response.text();
+        ArtikelLaden(JSON.parse(data));
         AufgabeA.form = document.getElementById("FormArtikel");
     }
     AufgabeA.handleLoad = handleLoad;
@@ -31,13 +32,13 @@ var AufgabeA;
         HeadingFrame.appendChild(Heading4);
         HeadingFrame.appendChild(Heading5);
         tableFrame.appendChild(HeadingFrame);
-        for (let i = 0; i < data.length; i++) { //geht über Artikel
+        for (let i = 0; i < data.length; i++) {
             let DataFrame = document.createElement("tr");
             let checkbox;
             if (data[i].Status == "Frei") {
                 checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
-                checkbox.setAttribute("price", data[i].price.toFixed(2)); //Attribut price einführen, Fixed(2) macht 2 Nachkommastellen
+                checkbox.setAttribute("price", data[i].price.toFixed(2));
                 checkbox.setAttribute("id", data[i]._id);
                 checkbox.setAttribute("name", "cb" + data[i].titel);
                 checkbox.value = data[i].titel;
@@ -78,22 +79,18 @@ var AufgabeA;
         showAuswahl();
     }
     function showAuswahl() {
-        console.log("showauswahl");
-        let price = 0; //wir fangen bei 0 an
-        let auswahl = document.querySelector("div#Auswahl"); //div für die ausgewählten Elemente
-        auswahl.innerHTML = ""; //wir fangen leer an
-        let formData = new FormData(AufgabeA.form); //form info für showAuswahl
-        console.log("form:", AufgabeA.form);
-        console.log(formData);
+        let price = 0;
+        let auswahl = document.querySelector("div#Auswahl");
+        auswahl.innerHTML = "";
+        let formData = new FormData(AufgabeA.form);
         localStorage.setItem("selected", "");
         localStorage.setItem("ids", "");
         let ids = [];
         let selected = [];
-        for (let entry of formData.values()) { //durchläuft das formular
-            console.log(entry);
-            let selector = "[value='" + entry + "']"; // "[name='" + entry[0] + "'][value='" + entry[1] + "']"; //i dont understand
-            let artikel = document.querySelector(selector); //selected artikel aus form
-            let artikelPrice = Number(artikel.getAttribute("price")); //preis abfragen //Number() macht aus string number, parseFloat didnt work??
+        for (let entry of formData.values()) {
+            let selector = "[value='" + entry + "']";
+            let artikel = document.querySelector(selector);
+            let artikelPrice = Number(artikel.getAttribute("price"));
             let id = Number(artikel.getAttribute("id"));
             ids.push(id);
             selected.push(entry);
@@ -102,7 +99,7 @@ var AufgabeA;
         localStorage.setItem("ids", ids.join(", "));
         localStorage.setItem("selected", selected.join(", "));
         auswahl.innerHTML += selected.join(", ") + "<br>";
-        auswahl.innerHTML += "Summe: €" + price.toFixed(2); //Summe ausgeben
+        auswahl.innerHTML += "Summe: €" + price.toFixed(2);
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
     }
 })(AufgabeA || (AufgabeA = {}));

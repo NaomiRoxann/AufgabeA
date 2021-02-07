@@ -3,21 +3,17 @@ namespace AufgabeA {
     let url: string = "https://aufgabea.herokuapp.com";
     window.addEventListener("load", getArtikel);
 
-    // gibt Artikel aus der Datenbank aus
     async function getArtikel(): Promise<void> {
 
-        //let url: string = "https://aufgabea.herokuapp.com/getArtikel";
         let url: string = "https://aufgabea.herokuapp.com";
         let response: Response = await fetch(url + "/allArtikel");
-        let data: string = await response.text(); //JSON String enthält alle DB-Einträge
-        //let data: string = await response.json(); //so kann anscheinend diekt überetzt werden
-        //let Artikel: Artikel[] = await response.json(); //oder so
-        ArtikelLaden(JSON.parse(data)); // String formatieren in Array
+        let data: string = await response.text();
+        ArtikelLaden(JSON.parse(data));
     }
     function ArtikelLaden(data: Artikel[]): void {
 
         let artikelDiv = document.getElementById("Artikel");
-        artikelDiv.innerHTML = ""; //Element leer machen, damit man es immer wieder neu erzeugen kann
+        artikelDiv.innerHTML = "";
 
         let tableFrame = document.createElement("table");
 
@@ -32,8 +28,7 @@ namespace AufgabeA {
         HeadingFrame.appendChild(Heading5);
 
         tableFrame.appendChild(HeadingFrame);
-        for (let i: number = 0; i < data.length; i++) { //geht über Artikel
-
+        for (let i: number = 0; i < data.length; i++) {
             let DataFrame = document.createElement("tr");
 
             let Data1 = document.createElement("td");
@@ -50,14 +45,14 @@ namespace AufgabeA {
             let Data7 = document.createElement("td");
             if (data[i].Status == "Reserviert") {
                 Data6.innerHTML = data[i].Name;
-                let ausgeliehen: HTMLButtonElement = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
+                let ausgeliehen: HTMLButtonElement = document.createElement("button");
                 ausgeliehen.addEventListener("click", () => makeAusgeliehen(data[i]._id));
                 ausgeliehen.innerHTML = "Auf ausgeliehen setzen";
                 Data7.appendChild(ausgeliehen);
             }
             if (data[i].Status == "Ausgeliehen") {
                 Data6.innerHTML = data[i].Name;
-                let frei: HTMLButtonElement = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
+                let frei: HTMLButtonElement = document.createElement("button");
                 frei.addEventListener("click", () => makeFrei(data[i]._id));
                 frei.innerHTML = "Auf frei setzen.";
                 Data7.appendChild(frei);
@@ -74,14 +69,12 @@ namespace AufgabeA {
 
     }
 
-    async function makeAusgeliehen(id: string): Promise<void> { // verändert DB-Eintrag - Status: gesendet
+    async function makeAusgeliehen(id: string): Promise<void> {
         let fetchUrl = url + "/makeAusgeliehen?" + "id=" + id;
         await fetch(fetchUrl);
         await getArtikel();
     }
-    async function makeFrei(id: string): Promise<void> { // verändert DB-Eintrag - Status: gesendet
-        //let url: string = "https://aufgabea.herokuapp.com";
-        // let url: string = "http://localhost:8000";
+    async function makeFrei(id: string): Promise<void> {
         let fetchUrl = url + "/makeFrei?" + "id=" + id;
         await fetch(fetchUrl);
         await getArtikel();
