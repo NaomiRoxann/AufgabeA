@@ -130,9 +130,9 @@ namespace AufgabeA {
 
 
         }
-        localStorage.setItem("ids", ids.join(","));
-        localStorage.setItem("selected", selected.join(","));
-        auswahl.innerHTML += selected.join(",") + "<br>";
+        localStorage.setItem("ids", ids.join(", "));
+        localStorage.setItem("selected", selected.join(", "));
+        auswahl.innerHTML += selected.join(", ") + "<br>";
         auswahl.innerHTML += "Summe: €" + price.toFixed(2); //Summe ausgeben
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
     }
