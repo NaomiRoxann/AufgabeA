@@ -44,6 +44,8 @@ var AufgabeA;
         let formular = document.getElementById("formCheckout"); // Formular nach dem Absenden zurücksetzen
         if (formular)
             formular.reset();
+        localStorage.removeItem("selected");
+        localStorage.removeItem("Summe");
         console.log(url);
         await fetch(url);
         alert("Wir sehen uns im ASTA Büro!"); // Benachrichtigung an Nutzer

@@ -58,6 +58,8 @@ namespace AufgabeA {
         let formular: HTMLFormElement = <HTMLFormElement>document.getElementById("formCheckout"); // Formular nach dem Absenden zurücksetzen
         if (formular)
             formular.reset();
+        localStorage.removeItem("selected");
+        localStorage.removeItem("Summe");
 
         console.log(url);
         await fetch(url);
