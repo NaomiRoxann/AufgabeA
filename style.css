@@ -22,10 +22,10 @@ body{
      width: 80%;
     margin: auto;
 }
-#button{
+#buttonAuswahl {
     width: 80%;
     margin: auto;
-    padding: 1em;
+    padding: 2em;
 }
 h1{
     display: flex;
