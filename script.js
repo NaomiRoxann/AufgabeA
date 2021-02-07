@@ -62,14 +62,14 @@ var AufgabeA;
             if (data[i].Status == "Ausgeliehen")
                 Data5.classList.add("ausgeliehen");
             Data5.innerText = data[i].Status;
-            if (checkbox) {
-                DataFrame.appendChild(checkbox);
-            }
             DataFrame.appendChild(Data1);
             DataFrame.appendChild(Data2);
             DataFrame.appendChild(Data3);
             DataFrame.appendChild(Data4);
             DataFrame.appendChild(Data5);
+            if (checkbox) {
+                DataFrame.appendChild(checkbox);
+            }
             tableFrame.appendChild(DataFrame);
         }
         artikelDiv.appendChild(tableFrame);
