@@ -2,25 +2,12 @@
 var AufgabeA;
 (function (AufgabeA) {
     window.addEventListener("load", handleLoad); //js wird direkt mit dem laden der Seite gestartet // ruft funktion handleload auf
-    // let url: string = "index.html";
-    //export let url: string = "https://aufgabea.herokuapp.com"; //serveradresse
     AufgabeA.url = "https://aufgabea.herokuapp.com";
     async function handleLoad(_event) {
-        console.log("Init"); //x
-        //aus db??
-        // let url: string = "https://aufgabea.herokuapp.com/getArtikel";
-        // let url: string = "http://localhost:8000/getArtikel";
         let response = await fetch(AufgabeA.url + "/allArtikel"); //warten bis Daten gefetched sind
         let data = await response.text(); //json parse kann nur strings zu arrays parsen, deshalb muss die response erst in eine variable vom typ string gepackt werden
         ArtikelLaden(JSON.parse(data)); //Daten übersetzen
-        console.log("1"); //x
-        //        let button: HTMLButtonElement = document.querySelector("button[type=button]"); //variable für type button Button einfügen
-        //
-        console.log("2"); //x
         AufgabeA.form = document.getElementById("FormArtikel");
-        //verändert sich die Auswahl?
-        //        button.addEventListener("click", submitAuswahl); //wurde der button geklickt?
-        console.log("xxxtoxxx"); //x
     }
     AufgabeA.handleLoad = handleLoad;
     function ArtikelLaden(data) {
@@ -46,10 +33,9 @@ var AufgabeA;
         HeadingFrame.appendChild(Heading4);
         HeadingFrame.appendChild(Heading5);
         tableFrame.appendChild(HeadingFrame);
-        //console.log(data);
         for (let i = 0; i < data.length; i++) { //geht über Artikel
             let DataFrame = document.createElement("tr");
-            //Checkbox
+            let Data0 = document.createElement("td");
             let checkbox;
             if (data[i].Status == "Frei") {
                 checkbox = document.createElement("input");
@@ -59,6 +45,7 @@ var AufgabeA;
                 checkbox.setAttribute("name", "cb" + data[i].titel);
                 checkbox.value = data[i].titel;
             }
+            Data0.appendChild(checkbox);
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
             let Data2 = document.createElement("td");
@@ -78,7 +65,7 @@ var AufgabeA;
                 Data5.classList.add("ausgeliehen");
             Data5.innerText = data[i].Status;
             if (checkbox) {
-                DataFrame.appendChild(checkbox);
+                DataFrame.appendChild(Data0);
             }
             DataFrame.appendChild(Data1);
             DataFrame.appendChild(Data2);
@@ -93,14 +80,6 @@ var AufgabeA;
     function handleChange(_event) {
         showAuswahl();
     }
-    // async function submitAuswahl(_event: Event): Promise<void> { //async liefert promise --
-    //     console.log("submit Auswahl"); //x
-    //     let formData: FormData = new FormData(form); //form info für submitAuswahl
-    //     let query: URLSearchParams = new URLSearchParams(<any>formData); //query string "erstellen"/abrufen als Array
-    //     let response: Response = await fetch(url + "?" + query.toString()); //Daten senden, danach gehts erst hier weiter
-    //     let responseText: string = await response.text(); //brauch ich das alles überhaupt?
-    //     alert(responseText);
-    // }
     function showAuswahl() {
         console.log("showauswahl");
         let price = 0; //wir fangen bei 0 an
@@ -123,9 +102,9 @@ var AufgabeA;
             selected.push(entry);
             price += artikelPrice;
         }
-        localStorage.setItem("ids", ids.join(","));
-        localStorage.setItem("selected", selected.join(","));
-        auswahl.innerHTML += selected.join(",") + "<br>";
+        localStorage.setItem("ids", ids.join("<br>"));
+        localStorage.setItem("selected", selected.join("<br>"));
+        auswahl.innerHTML += selected.join("<br>") + "<br>";
         auswahl.innerHTML += "Summe: €" + price.toFixed(2); //Summe ausgeben
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
     }

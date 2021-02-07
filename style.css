@@ -17,21 +17,20 @@ body{
 h1{
     display: flex;
     justify-content: center;
-    font-size: 10vw;
+    font-size: 8vw;
     color: rgb(91, 87, 119);
     text-shadow: 2px 2px 5px lightslategray;
 }
 table{
     align-items: center;
-    width: 100%;
+    width: 80%;
 }
 th{
-    align-content: center;
-    padding: 5%;
+    
 }
 td{
     align-content: center;
-    padding: 5%;
+    padding: 2% 5%;
 }
 img{
     padding: 5%;
