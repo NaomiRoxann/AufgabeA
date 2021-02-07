@@ -53,8 +53,6 @@ namespace AufgabeA {
         for (let i: number = 0; i < data.length; i++) { //geht über Artikel
 
             let DataFrame = document.createElement("tr");
-
-            let Data0 = document.createElement("td");
             let checkbox: HTMLInputElement;
             if (data[i].Status == "Frei") {
                 checkbox = document.createElement("input");
@@ -64,7 +62,6 @@ namespace AufgabeA {
                 checkbox.setAttribute("name", "cb" + data[i].titel);
                 checkbox.value = data[i].titel;
             }
-            Data0.appendChild(checkbox);
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
             let Data2 = document.createElement("td");
@@ -86,7 +83,7 @@ namespace AufgabeA {
 
 
             if (checkbox) {
-                DataFrame.appendChild(Data0);
+                DataFrame.appendChild(checkbox);
             }
 
             DataFrame.appendChild(Data1);
@@ -133,9 +130,9 @@ namespace AufgabeA {
 
 
         }
-        localStorage.setItem("ids", ids.join("<br>"));
-        localStorage.setItem("selected", selected.join("<br>"));
-        auswahl.innerHTML += selected.join("<br>") + "<br>";
+        localStorage.setItem("ids", ids.join(","));
+        localStorage.setItem("selected", selected.join(","));
+        auswahl.innerHTML += selected.join(",") + "<br>";
         auswahl.innerHTML += "Summe: €" + price.toFixed(2); //Summe ausgeben
         localStorage.setItem("Summe", "Summe: " + JSON.stringify(price.toFixed(2) + " €"));
     }
