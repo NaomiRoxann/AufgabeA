@@ -47,6 +47,7 @@ var AufgabeA;
                 Data7.appendChild(ausgeliehen);
             }
             if (data[i].Status == "Ausgeliehen") {
+                Data6.innerHTML = data[i].Name;
                 let frei = document.createElement("button"); // Button, um einen DB-Eintrag zu bearbeiten
                 frei.addEventListener("click", () => makeFrei(data[i]._id));
                 frei.innerHTML = "Auf frei setzen.";
