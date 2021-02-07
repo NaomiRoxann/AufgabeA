@@ -9,30 +9,30 @@ header{ /*Smarphones bis iPad Pro 12.9 inch*/
 }
 
 body{
-    width: 80%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     
 }
 #FormArtikel {
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 #AuswahlDiv{
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 #Auswahl{
-     width: 80%;
+     width: 90%;
     margin: auto;
 }
 #buttonAuswahl {
-    width: 80%;
+    width: 90%;
     margin: auto;
     padding: 2em;
 }
 #formCheckout {
-    width: 80%;
+    width: 90%;
     margin: auto;
     padding: 2em;
 }
