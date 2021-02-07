@@ -1,6 +1,6 @@
 import * as Http from "http"; //Laden des Modules (Erweiterung) HTTP, um einen Server zu bauen. * = sämtliche Funktionalität laden
 import * as Url from "url"; //url kommt mit request //Aufgabe des Url Moduls ist die Aufsplittung der URl in lesbare Teile. Muss importiert werden zur Verwendung
-import { Collection, MongoClient, Cursor, MongoClientOptions } from "mongodb";
+import { Collection, MongoClient, MongoClientOptions } from "mongodb";
 import * as fs from "fs";
 
 
@@ -47,7 +47,7 @@ export namespace AufgabeA {
             }
 
             if (url.pathname == "/allArtikel") { // Name für Reservierung in die DB
-                let allartikeldb: Cursor<string> = allartikel.find(); //liest die einzelnen Dokumente der DB aus
+                let allartikeldb = allartikel.find(); //liest die einzelnen Dokumente der DB aus
                 let allartikelArray: string[] = await allartikeldb.toArray(); //The toArray() method loads into RAM all documents returned by the cursor; the toArray() method exhausts the cursor.
                 let allartikelString: string = JSON.stringify(allartikelArray);
                 _response.write(allartikelString);
