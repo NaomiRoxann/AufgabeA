@@ -86,7 +86,7 @@ namespace AufgabeA {
 
 
             if (checkbox) {
-                DataFrame.appendChild(Data0);
+                DataFrame.appendChild(checkbox);
             }
 
             DataFrame.appendChild(Data1);

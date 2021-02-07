@@ -65,7 +65,7 @@ var AufgabeA;
                 Data5.classList.add("ausgeliehen");
             Data5.innerText = data[i].Status;
             if (checkbox) {
-                DataFrame.appendChild(Data0);
+                DataFrame.appendChild(checkbox);
             }
             DataFrame.appendChild(Data1);
             DataFrame.appendChild(Data2);
