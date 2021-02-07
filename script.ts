@@ -54,7 +54,6 @@ namespace AufgabeA {
 
             let DataFrame = document.createElement("tr");
 
-            let Data0 = document.createElement("td");
             let checkbox: HTMLInputElement;
             if (data[i].Status == "Frei") {
                 checkbox = document.createElement("input");
@@ -64,7 +63,6 @@ namespace AufgabeA {
                 checkbox.setAttribute("name", "cb" + data[i].titel);
                 checkbox.value = data[i].titel;
             }
-            Data0.appendChild(checkbox);
             let Data1 = document.createElement("td");
             Data1.innerText = data[i].titel;
             let Data2 = document.createElement("td");
