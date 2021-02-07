@@ -44,6 +44,10 @@ img{
     width: 100px;
     height: 100px;
 }
+checkbox{
+    margin: auto;
+    vertical-align: middle;
+}
 .frei{
     color: rgb(0, 255, 0);
 }
