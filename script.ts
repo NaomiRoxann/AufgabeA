@@ -29,7 +29,6 @@ namespace AufgabeA {
 
         let HeadingFrame = document.createElement("tr");
 
-        let firstRow = document.createElement("th");
         let Heading1 = document.createElement("th");
         Heading1.innerText = "Titel";
         let Heading2 = document.createElement("th");
@@ -41,7 +40,6 @@ namespace AufgabeA {
         let Heading5 = document.createElement("th");
         Heading5.innerText = "Status";
 
-        HeadingFrame.appendChild(firstRow);
         HeadingFrame.appendChild(Heading1);
         HeadingFrame.appendChild(Heading2);
         HeadingFrame.appendChild(Heading3);
